@@ -1,5 +1,6 @@
 <?php
 
+//function for initial loading of all templates.
 function load_template($name){
  
     //__DIR__ provides the absolute path to the directory containing the current PHP script, tightly coupled with current working directory
@@ -12,5 +13,16 @@ function load_template($name){
     //$_SERVER[DOCUMENT_ROOT] => /var/www/html 
     include $_SERVER['DOCUMENT_ROOT']."/photogram/app/_templates/$name.php";
      
+}
+
+//function for user validation.
+function validate_credential($username, $password){  
+    if($username == "kvpradeep60@gmail.com" and $password == "password"){
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
 ?>
