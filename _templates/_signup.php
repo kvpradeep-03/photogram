@@ -1,26 +1,6 @@
-<?php
-
-$username = $_POST['email'];
-$password = $_POST['password'];
-
-$result = validate_credential($username, $password);
-
-if($result){
-    ?>
-    <main class="container">
-        <div class="bg-body-tertiary p-5 rounded mt-3">
-            <h1>Login Success</h1>
-            <p class="lead">Now you can explore the trending clicks!.</p>
-            <a class="btn btn-lg btn-primary" href="/docs/5.3/components/navbar/" role="button">View navbar docs »</a>
-        </div>
-    </main>
-    <?
-} else {
-
-?>
-
-<main class="form-login w-100 m-auto">
-  <form action="login.php" method="post">
+<!--signup form-->
+<main class="form-signup w-100 m-auto">
+  <form action="signup.php" method="post">
     <img class="mb-4" src="https://cdn-icons-png.flaticon.com/128/10401/10401230.png" alt="" width="100" height="87">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -43,7 +23,3 @@ if($result){
     <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
   </form>
 </main>
-
-<?php
-}
-?>
