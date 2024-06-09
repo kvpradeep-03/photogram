@@ -37,7 +37,7 @@ function validate_credential($username, $password){
 
 }
 
-
+//php insertsql
 function signup($user, $pass, $email, $phone){
     $servername = "mysql.selfmade.ninja";
     $username = "photogram_db";

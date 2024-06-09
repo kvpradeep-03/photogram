@@ -1,7 +1,7 @@
 <pre>
 
 <?php
-
+include 'libs/load.php';
 //The $_SERVER superglobal is an array containing information such as headers, paths, and script locations.
 echo '$_SERVER<br>';
 print_r($_SERVER);
@@ -35,6 +35,15 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 50), "/"); //for 50 day
 
 echo '$_COOKIE<br>';
 print_r($_COOKIE);
+
+//DB connection testing
+if(signup("hello","hello23@","hello@gmail.com","467894300")){
+    echo "success";
+}else {
+    echo "fail";
+}
+
+
 
 
 ?>
