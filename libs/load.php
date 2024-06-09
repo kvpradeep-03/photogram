@@ -1,5 +1,16 @@
 <?php
 
+//php error display
+
+// Enable error reporting for debugging purposes
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+
+
+
 //function for initial loading of all templates.
 function load_template($name){
  
@@ -25,4 +36,34 @@ function validate_credential($username, $password){
     }
 
 }
+
+
+function signup($user, $pass, $email, $phone){
+    $servername = "mysql.selfmade.ninja";
+    $username = "photogram_db";
+    $password = "prad2003";
+    $dbname = "photogram_db_auth";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+   
+    $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `block`, `active`)
+    VALUES ('$user', '$pass', '$email', '$phone', '0', '1')";
+    $error = false;
+    if ($conn->query($sql) === true) {
+        $error = false;
+    } else {
+        //echo "Error: " . $sql . "<br>" . $conn->error;
+        $error= $conn->error;
+    }
+
+    $conn->close(); 
+    return $error;
+}
 ?>
+
+
