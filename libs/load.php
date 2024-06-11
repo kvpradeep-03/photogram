@@ -3,9 +3,9 @@
 //php error display
 
 // Enable error reporting for debugging purposes
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 
 
@@ -37,8 +37,10 @@ function validate_credential($username, $password){
 
 }
 
-//php insertsql
-function signup($user, $pass, $email, $phone){
+
+
+function signup($user,$pass,$email,$phone){
+    
     $servername = "mysql.selfmade.ninja";
     $username = "photogram_db";
     $password = "prad2003";
@@ -48,21 +50,30 @@ function signup($user, $pass, $email, $phone){
     $conn = new mysqli($servername, $username, $password, $dbname);
     // Check connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
     }
-   
+
     $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `block`, `active`)
     VALUES ('$user', '$pass', '$email', '$phone', '0', '1')";
+    //print_r($sql);
     $error = false;
-    if ($conn->query($sql) === true) {
+    try {
+        if($conn->query($sql) === true) {
         $error = false;
     } else {
         //echo "Error: " . $sql . "<br>" . $conn->error;
-        $error= $conn->error;
+        $error = true;
+        throw new Exception ($conn->error); 
+    } 
+    } catch (Exception $e){
+        $error = $e->getMessage();
+        //return $err
     }
 
-    $conn->close(); 
+    // $conn->close();
     return $error;
+
+    
 }
 ?>
 
