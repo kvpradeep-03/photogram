@@ -22,7 +22,7 @@
         </main>
 <?php
     } else {
-?>
+?>  
         <main class="container">
           <div class="bg-body-tertiary p-5 rounded mt-3">
             <h1>Signup Fail</h1>
