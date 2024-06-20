@@ -8,6 +8,12 @@
 //error_reporting(E_ALL);
 
 
+//included class files
+//include_once just includes a file only at once and store it in a memory,it doesn't includes furthermore even if we reload this page
+include_once 'includes/Mic.class.php';
+include_once 'includes/Database.class.php';
+include_once 'includes/User.class.php';
+
 
 
 
@@ -23,6 +29,7 @@ function load_template($name){
     //these superglobal are responsible for transferring information(input request) from apache to php.
     //$_SERVER[DOCUMENT_ROOT] => /var/www/html 
     include $_SERVER['DOCUMENT_ROOT']."/photogram/app/_templates/$name.php";
+    
      
 }
 
@@ -39,42 +46,7 @@ function validate_credential($username, $password){
 
 
 
-function signup($user,$pass,$email,$phone){
-    
-    $servername = "mysql.selfmade.ninja";
-    $username = "photogram_db";
-    $password = "prad2003";
-    $dbname = "photogram_db_auth";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `block`, `active`)
-    VALUES ('$user', '$pass', '$email', '$phone', '0', '1')";
-    //print_r($sql);
-    $error = false;
-    try {
-        if($conn->query($sql) === true) {
-        $error = false;
-    } else {
-        //echo "Error: " . $sql . "<br>" . $conn->error;
-        $error = true;
-        throw new Exception ($conn->error); 
-    } 
-    } catch (Exception $e){
-        $error = $e->getMessage();
-        //return $err
-    }
-
-    // $conn->close();
-    return $error;
-
-    
-}
 ?>
 
 
