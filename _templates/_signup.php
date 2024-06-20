@@ -5,7 +5,7 @@
       $password = $_POST['password'];
       $email = $_POST['email'];
       $phone = $_POST['phone'];
-      $error = signup($username,$password,$email,$phone);
+      $error = User::signup($username,$password,$email,$phone); //fetches the error from User.clss.php
       $signup = true;
     }
 ?>
