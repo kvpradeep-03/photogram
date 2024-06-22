@@ -10,9 +10,12 @@
 
 //included class files
 //include_once just includes a file only at once and store it in a memory,it doesn't includes furthermore even if we reload this page
+include_once 'includes/Session.class.php';
 include_once 'includes/Mic.class.php';
-include_once 'includes/Database.class.php';
 include_once 'includes/User.class.php';
+include_once 'includes/Database.class.php';
+
+
 
 
 
