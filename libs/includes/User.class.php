@@ -2,7 +2,7 @@
 
 class User{
     public static function signup($user,$pass,$email,$phone){
-    
+        $pass = md5($pass); //hashes the password while saving in db
         $conn = Database::getconnection();  //connection is fetches from Database.class.php
         $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `block`, `active`)    
         VALUES ('$user', '$pass', '$email', '$phone', '0', '1')";   //inserting the data's into sql table
