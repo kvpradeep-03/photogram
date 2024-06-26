@@ -15,10 +15,7 @@ include_once 'includes/Mic.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Database.class.php';
 
-
-
-
-
+Session::start();
 
 //function for initial loading of all templates.
 function load_template($name){
@@ -32,7 +29,6 @@ function load_template($name){
     //these superglobal are responsible for transferring information(input request) from apache to php.
     //$_SERVER[DOCUMENT_ROOT] => /var/www/html 
     include $_SERVER['DOCUMENT_ROOT']."/photogram/app/_templates/$name.php";
-    
      
 }
 
