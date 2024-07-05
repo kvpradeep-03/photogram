@@ -3,7 +3,7 @@
 $username = $_POST['email'];
 $password = $_POST['password'];
 
-$result = validate_credential($username, $password);
+$result = User::login($email,$pass);;
 
 if($result){
     ?>
@@ -11,7 +11,7 @@ if($result){
         <div class="bg-body-tertiary p-5 rounded mt-3">
             <h1>Login Success</h1>
             <p class="lead">Now you can explore the trending clicks!.</p>
-            <a class="btn btn-lg btn-primary" href="/docs/5.3/components/navbar/" role="button">View navbar docs »</a>
+            <p class="lead"><a href="/photogram/app">here</a></p>
         </div>
     </main>
     <?
@@ -25,11 +25,11 @@ if($result){
     <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
     <div class="form-floating">
-      <input name = "email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input name = "email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input name = "password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name = "password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
       <label for="floatingPassword">Password</label>
     </div>
 
