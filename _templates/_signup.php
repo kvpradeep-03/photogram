@@ -39,19 +39,19 @@
     <img class="mb-4" src="https://cdn-icons-png.flaticon.com/128/10401/10401230.png" alt="" width="100" height="87">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
     <div class="form-floating">
-      <input name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
+      <input name="username" type="text" class="form-control" id="floatingInput" placeholder="username" required>
       <label for="floatingInputusername">Username</label>
     </div>
     <div class="form-floating">
-      <input name="phone" type="text" class="form-control" id="floatingInput" placeholder="phone">
+      <input name="phone" type="text" class="form-control" id="floatingInput" placeholder="phone" required>
       <label for="floatingInputphone">Phone</label>
     </div>
     <div class="form-floating">
-      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInputemail">Email address</label>
     </div>
     <div class="form-floating">
-      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
       <label for="floatingPassword">Password</label>
     </div>
 
