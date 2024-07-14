@@ -53,6 +53,44 @@ class User{
 
 
     }
+    
+    public function _construct($username){
+        $this->conn = Database::getConnection();
+
+        $this->username = $username; 
+        
+        //TODO:write the code to fetch user data to fetch from the Database for the given username
+        $query = "SELECT `id` FROM `auth` WHERE `username` = $username";
+        $this->id = $conn->query($query); //update this from database
+        
+        
+    }
+
+    public function authenticate(){
+
+    }
+
+    public function setBio($bio){
+        //TODO: write UPDATE cmd to change new bio
+        $query = "UPDATE users SET bio = 'bio changed successfully' WHERE id = '194'";
+
+    }
+
+    public function getBio(){
+        //TODO: write SELECT cmd to get the bio
+        $query = "SELECT `bio` FROM `users` WHERE `id` = '194' LIMIT 50";
+        
+    }
+
+    public function setAvatar($link){
+        $query = "SELECT `instagram` FROM `users` WHERE `id` = '194' LIMIT 50";
+    }
+
+    public function getAvatar(){
+        $query = "SELECT `instagram`, `twitter`, `facebook` FROM `users` WHERE `id` = '194' LIMIT 50";
+    }
+
+
 }
 
 
