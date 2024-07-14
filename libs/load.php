@@ -15,7 +15,24 @@ include_once 'includes/Mic.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Database.class.php';
 
+//sets global var
+global $__site_config; 
+//moves one step back from current working dir(htdocs) and reads the json config file as string.
+$__site_config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../photogramconfig.json');   
+
 Session::start();
+
+function get_config($key, $default= null){
+    //access global var
+    global $__site_config;  
+    // Decodes the JSON string ($__site_config) into a PHP associative array ($array).true indicates that the decoded JSON objects should be returned as associative arrays
+    $array= json_decode($__site_config, true);
+    if(isset($array[$key])){
+        return $array[$key];
+    }else {
+        return $default;
+    }
+}
 
 //function for initial loading of all templates.
 function load_template($name){
