@@ -1,13 +1,16 @@
 <?php
  
  class Database{
-    public static $conn = null; //checkes the connection is empty?
+    //checkes the connection is empty?
+    public static $conn = null; 
     public static function getConnection(){
-        if(Database::$conn == null){    //at initial new connection the $conn ->obeviously empty
-            $servername = "mysql.selfmade.ninja";
-            $username = "photogram_db";
-            $password = "prad2003";
-            $dbname = "photogram_db_auth";
+        //at initial new connection the $conn ->obeviously empty
+        if(Database::$conn == null){ 
+            //get_config function loads in load.php  
+            $servername = get_config('db_server');
+            $username = get_config('db_username');
+            $password = get_config('db_password');
+            $dbname = get_config('db_name');
 
             // Create connection
             //$connection -> An instance of the mysqli class, which is used to connect to a MySQL database.
@@ -17,7 +20,8 @@
             if ($connection->connect_error) {   
             die("Connection failed: " . $connection->connect_error);
             }else{
-                Database::$conn = $connection;  //replacing null with actual connection (server connection information status)
+                //replacing null with actual connection (server connection information status)
+                Database::$conn = $connection; 
                 return Database::$conn;
             }   
 
@@ -26,5 +30,5 @@
         }
     }
  }
-
+ 
 ?>
