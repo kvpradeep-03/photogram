@@ -84,7 +84,7 @@ function test_signup($user,$pass,$email,$phone){
  
  test_signup("multi1","multi1pass","multi1@vgw.com","326437432");
  test_signup("multi2","multi1pass","multi2@vgw.com","326437432");
- test_signup("multi3","multi1pass","multi3@vgw.com","326437432");*/
+ test_signup("multi3","multi1pass","multi3@vgw.com","326437432");
 
  //constructing the objects
  // -were it give an instance(clone of original class mic) to the $mic1 and $mic2
@@ -114,9 +114,81 @@ $mic1->color = "Mercury blue";
 $mic1->applyColor("Titaniam grey");
  
 $conn = Database::getconnection();
-$conn = Database::getconnection();
+$conn = Database::getconnection();*/
 
+class car {
+	public $color;
+    public static $year;
+    protected static $type;
+    
+    public function setColor($color){
+    	$this->color = $color;
+    }
+    public function getColor(){
+      return 'Car color is '.$this->color."\n";
+    }
+    public static function setYear($year){
+    	self::$year = $year;
+    }
+    public static function getYear(){
+        return 'Car year is '.self::$year."\n";
+    }
 
+    public static function setType($type){
+        self::$type = $type;
+    }
+    public function getType($type){
+        return $this->type;
+    }
+}
+
+class registed extends car {
+    public $no;
+    protected $rating;
+
+    public function __construct($year,$no){
+        self::$year = $year;
+        $this->no = $no;
+        echo "Car manf YEAR: " .self::$year. " and REG.NO: ".$this->no;
+ 
+    }
+
+    public function setRating($rating){
+        $this->rating = $rating;
+    }
+    public function getRating(){
+        return $this->rating;
+    }
+
+    public function getPrivateinfo(){
+        echo "Car's TYPE: ".self::$type. " and Rating: ".$this->rating;
+    }
+    
+ 
+}
+interface slot{
+    public function slot();
+}
+class carsBikes implements slot{
+    public function slot(){
+        echo "park your vehicle in BAY-10338\n";
+    }
+}
+class trucks implements slot{
+    public function slot(){
+        echo "park your vehicle in BAY-20637\n";
+    }
+}
+$car1 = new car();
+$car1->setColor('blue');
+echo $car1->getColor();
+$car1->setYear('2023');
+$car1->setType('Crossover');
+
+echo $car1->getYear();
+$reg = new registed(2003,'TN12R0983');
+$reg->setRating(4.5);
+$reg->getPrivateinfo();
 
 
 ?>
