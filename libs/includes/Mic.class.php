@@ -18,6 +18,11 @@ class Mic{
     public $price;
     private $version;
 
+public function __call($name,$arguments){   //_call fun will be called if the called function is not avalilabe in the class(like switchcase default in py)
+    print("\nCalling: $name\n");
+    print_r($arguments);
+    print("\n");
+}
 
 public function setLight($light){ //'setLight' is function which calls a recent property of an obj($mic1->setLight("blue"))
     echo $light."\n";
@@ -36,15 +41,6 @@ public function applyColor($color){
 }
 
 
-
-
-
-
-
-
 }
-
-
-
 
 ?>
