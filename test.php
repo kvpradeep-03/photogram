@@ -88,7 +88,7 @@ function test_signup($user,$pass,$email,$phone){
 
  //constructing the objects
  // -were it give an instance(clone of original class mic) to the $mic1 and $mic2
-
+*/
 $mic1 = new Mic();
 $mic2 = new Mic();
 
@@ -112,9 +112,11 @@ $mic2->setPrice("109"); //coupen applied
 
 $mic1->color = "Mercury blue";
 $mic1->applyColor("Titaniam grey");
- 
+
+$mic1->getVoltage(array(0.1,2,33,42),'hello',$varient = new Mic());     //goes to __call function
+/*
 $conn = Database::getconnection();
-$conn = Database::getconnection();*/
+$conn = Database::getconnection();
 
 class car {
 	public $color;
@@ -188,7 +190,8 @@ $car1->setType('Crossover');
 echo $car1->getYear();
 $reg = new registed(2003,'TN12R0983');
 $reg->setRating(4.5);
-$reg->getPrivateinfo();
+$reg->getPrivateinfo();*/
+
 
 
 ?>
