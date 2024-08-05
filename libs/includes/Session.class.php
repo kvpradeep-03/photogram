@@ -28,7 +28,7 @@ class Session{
 
     public static function get($key,$default = false){
         if(Session::isset($key)){
-            return $_SESSION[$key];  //returns the key.
+            return $_SESSION[$key];  //returns the value.
         }else{
             return $default;
         }
