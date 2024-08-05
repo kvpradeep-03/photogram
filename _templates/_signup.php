@@ -5,8 +5,8 @@
       $password = $_POST['password'];
       $email = $_POST['email'];
       $phone = $_POST['phone'];
-      $error = User::signup($username,$password,$email,$phone); //fetches the error from User.clss.php
-      $signup = true; //when all the datas are fetched from form them sigup sets true
+      $error = User::signup($username,$password,$email,$phone);   //fetches the error from User.clss.php and assigns signuped user data to user class
+      $signup = true;   //when all the datas are fetched from form them sigup sets true
     }
 ?>
 
