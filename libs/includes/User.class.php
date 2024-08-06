@@ -17,7 +17,7 @@ class User{
         if(substr($name,0,3) == 'get'){ 
             return $this->_get_data($property);
         }elseif(substr($name,0,3) == 'set'){
-            return $this->_set_data($name,$arguments[0]);
+            return $this->_set_data($property,$arguments[0]);      //$arguments[0]->first argument provided to the originally called method is being used as the value to set.
             
         }
     }
@@ -95,7 +95,7 @@ class User{
         }
         $sql = "SELECT `$var` FROM `users` WHERE `id` = '$this->id'"; 
         $result = $this->conn->query($sql);
-        if($result and $result->num_rows == 1){
+        if($result->num_rows == 1){
             return $result->fetch_assoc()["$var"];      //retrieves the specified key value
         }else{
             return null;
@@ -108,7 +108,7 @@ class User{
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "UPDATE `users` SET '$var'='$data' WHERE `id`='$this->id'";  
+        $sql = "UPDATE `users` SET `$var` = '$data' WHERE `id` = '$this->id'";  
         if($this->conn->query($sql)){
             return true; 
         }else{
