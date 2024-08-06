@@ -13,7 +13,9 @@ if(isset($_GET['logout'])){
 if(Session::get('is_logedin')){   //retrives the previous session of user (session setted while logging in)  
     $username = Session::get('session_username');
     $userObj = new User($username); //if a session exists, use the session data to create the User object.
-    echo "Welcome back {$userObj->getUsername()} !<br>";
+    echo "Welcome back {$userObj->getavatar()} !<br>";
+    $userObj->setBio("i love tech ");
+    echo "Bio changed Succesfully ... `{$userObj->getbio()}`<br>";
 
 }else{
     echo "No Session found, trying to login now...<br>";
