@@ -8,7 +8,6 @@ class User{
     
     //_call fun will be called if the called function(method) is not avalilabe in the class(like switchcase default in py)
     public function __call($name,$arguments){  
-
         //Removes non-alphanumeric characters from the substring starting at the 4th character of $name.
         //substr simply cuts a str into a represented index
         $property = preg_replace("/[^0-9a-zA-Z]/","",substr($name, 3)); 
@@ -19,6 +18,10 @@ class User{
         }elseif(substr($name,0,3) == 'set'){
             return $this->_set_data($property,$arguments[0]);      //$arguments[0]->first argument provided to the originally called method is being used as the value to set.
             
+        }else{
+            //in __call fun if we call any undeclared function in a class if simply omits the arguments which has passed, without throwing error.
+            //so we are throwing exception for that un arguments passed for debugging purpose*.
+            throw new Exception("User::_call() -> $name, function unavailable.");
         }
     }
     
@@ -45,12 +48,9 @@ class User{
         } catch (Exception $e){
             $error = $e->getMessage();
         }
-    
         // $conn->close();
         //returns true/false (redirects to _sighup.php)
         return $error; 
-    
-        
     }
 
     public static function login($user,$pass){
@@ -67,8 +67,6 @@ class User{
         }else{
             return false;
         }
-
-
     }
     
     //fetches the username by the initialization of signup object of User class at signup form
@@ -104,7 +102,6 @@ class User{
 
     //this function  helps to set data in the database
     public function _set_data($var, $data){
-
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
@@ -114,8 +111,6 @@ class User{
         }else{
             return false;
         }
-
-    
     }
   
     //overrided dob
