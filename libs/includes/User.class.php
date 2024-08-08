@@ -60,6 +60,11 @@ class User{
         if($result->num_rows == 1){     // Checks if the result set contains no.of rows == 1
             $row = $result->fetch_assoc();      //fetch_assoc() ->returns the datas in the form of associative array. 
             if(password_verify($pass,$row['password'])){
+                /*
+                1.Generate Session Token.
+                2.Insert Session Token.
+                3.Build Session And Give Session To User.
+                */
                 return $row['username'];
             }else{
                 return false;
@@ -69,6 +74,7 @@ class User{
         }
     }
     
+    //User object can be constructed by both userId and username.
     //fetches the username by the initialization of signup object of User class at signup form
     //_construct fetches id of loged user via their username else throws error.
     public function __construct($username){
@@ -76,13 +82,13 @@ class User{
         $this->conn = Database::getConnection();
         $this->username = $username;
         $this->id = null;
-        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$username' LIMIT 1";
+        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username' LIMIT 1";
         $result = $this->conn->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_assoc(); 
             $this->id = $row['id']; //update this from database
         }else{
-            throw new exception("Username Not Found :( ");
+            throw new Exception("Username Not Found :( ");
         }
     }
 
