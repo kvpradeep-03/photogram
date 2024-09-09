@@ -12,6 +12,9 @@ class Session{
 
     public static function destroy(){
         session_destroy();  //destroys the current session.
+        /*
+        //TODO: If UserSession is active set it as inactive.
+        */
     }
 
     public static function set($key,$value){    
