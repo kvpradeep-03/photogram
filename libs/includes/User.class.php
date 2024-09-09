@@ -3,8 +3,8 @@
 class User{
    
     public $conn;
-    public $username; // Declare the username property
-    public $id; // Declare the id property   
+    public $username; // Declare the username property (auth table username)
+    public $id; // Declare the id property (auth table id)  
     
     //_call fun will be called if the called function(method) is not avalilabe in the class(like switchcase default in py)
     public function __call($name,$arguments){  
@@ -60,7 +60,7 @@ class User{
         if($result->num_rows == 1){     // Checks if the result set contains no.of rows == 1
             $row = $result->fetch_assoc();      //fetch_assoc() ->returns the datas in the form of associative array. 
             if(password_verify($pass,$row['password'])){
-                /*
+                /*[implemented in authorize function]
                 1.Generate Session Token.
                 2.Insert Session Token.
                 3.Build Session And Give Session To User.
@@ -78,15 +78,14 @@ class User{
     //fetches the username by the initialization of signup object of User class at signup form
     //_construct fetches id of loged user via their username else throws error.
     public function __construct($username){
-       // print($username);  
         $this->conn = Database::getConnection();
         $this->username = $username;
         $this->id = null;
-        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username' LIMIT 1";
+        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username' LIMIT 1"; //`id` = $id
         $result = $this->conn->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_assoc(); 
-            $this->id = $row['id']; //update this from database
+            $this->id = $row['id']; //instead of returning we are saving the id in User class itself.
         }else{
             throw new Exception("Username Not Found :( ");
         }
