@@ -3,9 +3,9 @@
 //php error display
 
 // Enable error reporting for debugging purposes
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 
 //included class files
@@ -14,6 +14,7 @@ include_once 'includes/Session.class.php';
 include_once 'includes/Mic.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Database.class.php';
+include_once 'includes/UserSession.class.php';
 
 //sets global var
 global $__site_config; 
