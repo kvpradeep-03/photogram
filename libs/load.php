@@ -27,7 +27,7 @@ $__site_config_path = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SE
 // Read the content of 'photogramconfig.json' from the resolved path 
 // and store it in the $__site_config variable.
 $__site_config = file_get_contents($__site_config_path);
-  
+
 
 Session::start();
 
