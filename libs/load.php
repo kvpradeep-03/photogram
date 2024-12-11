@@ -20,7 +20,7 @@ include_once 'includes/UserSession.class.php';
 global $__site_config; 
 //moves one step back from current working dir(htdocs) and reads the json config file as string.
 $__site_config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/../photogramconfig.json');   
-
+print($_SERVER['DOCUMENT_ROOT'].'/../photogramconfig.json'); 
 Session::start();
 
 function get_config($key, $default= null){
