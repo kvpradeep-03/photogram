@@ -17,7 +17,7 @@
         <main class="container">
           <div class="bg-body-tertiary p-5 rounded mt-3">
             <h1>Signup Success</h1>
-            <p class="lead">Now you can login <a href="/photogram/app/login.php">here</a></p>
+            <p class="lead">Now you can login <a href="<?=get_config('base_path')?>login.php">here</a></p>
           </div>
         </main>
 <?php

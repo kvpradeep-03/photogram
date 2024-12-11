@@ -1,5 +1,5 @@
 <head>
-    <script src="/photogram/app/assets/js/color-modes.js"></script>
+    <script src="<?=get_config('base_path')?>assets/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -13,15 +13,15 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="/photogram/app/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=get_config('base_path')?>assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <?php
      //$_SERVER['php_self'] returns the current executing script in the document root.
-     //basename slices the current file/folder in the given path . basename0("var/www/html/photogram/app/signup.php") --> signup.php .
-     //basename("var/www/html/photogram/app/signup.php",".php") --> signup  (slices the '.php' as mentioned).
+     //basename slices the current file/folder in the given path . basename0("var/www/html/get_config('base_path')/signup.php") --> signup.php .
+     //basename("var/www/html/get_config('base_path')/signup.php",".php") --> signup  (slices the '.php' as mentioned).
      //print_r(basename($_SERVER['PHP_SELF'],".php").'css'); 
-    if(file_exists($_SERVER['DOCUMENT_ROOT']).'/photogram/app/css/'.basename($_SERVER['PHP_SELF'],".php").".css"){ //example `signup.css` sile exist means give thaat file else no.?> 
+    if(file_exists($_SERVER['DOCUMENT_ROOT']).get_config('base_path').'css/'.basename($_SERVER['PHP_SELF'],".php").".css"){ //example `signup.css` sile exist means give thaat file else no.?> 
     <!--dynamic css link-->
-    <link href="/photogram/app/css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css" rel="stylesheet">
+    <link href="<?=get_config('base_path')?>css/<?=basename($_SERVER['PHP_SELF'],".php")?>.css" rel="stylesheet">
     <?}?>
 
 </head>
