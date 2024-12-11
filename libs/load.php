@@ -3,9 +3,9 @@
 //php error display
 
 // Enable error reporting for debugging purposes
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 
 //included class files
@@ -27,7 +27,7 @@ $__site_config_path = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SE
 // Read the content of 'photogramconfig.json' from the resolved path 
 // and store it in the $__site_config variable.
 $__site_config = file_get_contents($__site_config_path);
-
+echo($__site_config);
 
 Session::start();
 
@@ -54,7 +54,7 @@ function load_template($name){
     //superglobal is an array containing information such as headers, paths, and script locations, tightly coupled with server envirnoment and request details. 
     //these superglobal are responsible for transferring information(input request) from apache to php.
     //$_SERVER[DOCUMENT_ROOT] => /var/www/photohram  (not html) as configured in `apache2/sites-available/photogram.conf` 
-    include $_SERVER['DOCUMENT_ROOT']."/_templates/$name.php";
+    include $_SERVER['DOCUMENT_ROOT'].get_config('base_path')."/_templates/$name.php";
     
      
 }

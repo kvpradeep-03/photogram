@@ -28,7 +28,7 @@ if(Session::get('session_token')){   //retrives the previous session of user (se
     echo "Bio changed Succesfully ... `{$userObj->getbio()}`<br>";
 
 }else{
-    
+    echo "No Session found, trying to login now...<br>";
     $result = User::login($user,$pass); //it again gets the user input for $user and $pass.
     if($result){ 
         $userObj = new User($result);     //if session doesn't exist it create the User object using the newly obtained username and update the session
@@ -36,7 +36,7 @@ if(Session::get('session_token')){   //retrives the previous session of user (se
         Session::set('session_token',UserSession::authenticate($user,$pass));  
         Session::set('session_username',$userObj->getUsername());
     }else{
-        echo "login failed, $user<br>"; //TODO: check the flow of login process
+        echo "login failed, $user<br>"; 
 
     }
 }
