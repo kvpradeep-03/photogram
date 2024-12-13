@@ -17,13 +17,13 @@ jobs:
       # Step 1: Checkout the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
-
-      # Step 2: Deploy the application
-      - name: Deploy Application
-        run: |                      # 'run' lets you execute shell commands
-          echo "Deploying Application"          # Print a message to the console
-          echo "Application successfully deployed"  # Another message indicating success
-          ls /var/www                # List the contents of the /var/www directory (example)
-          sudo rm -rf /var/www/photogram/.git
-          echo ".git folder deleted from production"
         
+      - name: List Files Before Deletion
+        run: ls -la /var/www/photogram
+
+      - name: Delete .git Folder
+        run: sudo rm -rf /var/www/photogram/.git
+
+      - name: List Files After Deletion
+        run: ls -la /var/www/photogram
+
