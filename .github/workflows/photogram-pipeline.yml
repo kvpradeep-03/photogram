@@ -23,7 +23,7 @@ jobs:
       
       - name: Deploy with rsync
         run: |
-          rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
+          sudo rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
 
       - name: Verify Deployment Directory
         run: ls -la /var/www/photogram
