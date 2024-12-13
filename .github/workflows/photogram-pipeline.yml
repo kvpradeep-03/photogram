@@ -18,10 +18,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
      
-      - name: Verify Current Directory
-        run: pwd
+      - name: Deploy to /var/www/photogram
+        run: |
+          sudo mkdir -p /var/www/photogram
+          sudo cp -r /home/runner/work/photogram/photogram/* /var/www/photogram/
 
-      - name: List Contents Before Deletion
+      - name: Verify Deployment Directory
         run: ls -la /var/www/photogram
 
       - name: Delete .git Folder
