@@ -19,11 +19,11 @@ jobs:
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
         
       - name: List Files Before Deletion
-        run: ls -la /var/www/photogram
+        run: sudo ls -la /var/www/photogram
 
       - name: Delete .git Folder
         run: sudo rm -rf /var/www/photogram/.git
 
       - name: List Files After Deletion
-        run: ls -la /var/www/photogram
+        run: sudo ls -la /var/www/photogram
 
