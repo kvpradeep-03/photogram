@@ -31,7 +31,10 @@ jobs:
 
       - name: List Contents After Deletion
         run: ls -la /var/www/photogram
-              
+        
+      - name: rsync runner -------> web dir
+        run: rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
+      
       - name: List runner Contents After Deletion
         run: ls -la /home/runner/work/photogram/photogram/
 
