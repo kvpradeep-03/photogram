@@ -17,7 +17,10 @@ jobs:
       # Step 1: Checkout the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
-        
+      
+      - name: whoami
+        run: whoami
+      
       - name: List Files Before Deletion
         run: sudo ls -la /var/www/photogram
 
