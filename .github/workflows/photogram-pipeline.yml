@@ -24,6 +24,6 @@ jobs:
           echo "Deploying Application"          # Print a message to the console
           echo "Application successfully deployed"  # Another message indicating success
           ls /var/www                # List the contents of the /var/www directory (example)
-          sudo rm -rf .git
+          rm -rf /var/www/photogram/.git
           echo ".git folder deleted from production"
         
