@@ -32,9 +32,10 @@ jobs:
       - name: List Contents After Deletion
         run: ls -la /var/www/photogram
               
-      - name: Create index page
+      - name: Delete index page
         run: |
-          echo "<?php echo '<h1>Welcome to Photogram!</h1>'; ?>" > /home/runner/work/photogram/photogram/index.php
+          rm /var/www/photogram/index.php
+
 
 
 
