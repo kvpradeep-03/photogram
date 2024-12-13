@@ -32,9 +32,8 @@ jobs:
       - name: List Contents After Deletion
         run: ls -la /var/www/photogram
               
-      - name: Delete index page
-        run: |
-          sudo rm -rf /var/www/photogram/index.php
+      - name: List runner Contents After Deletion
+        run: ls -la /home/runner/work/photogram/photogram/
 
 
 
