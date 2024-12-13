@@ -18,15 +18,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
      
-      - name: List runner Directory
-        run: ls -la /home/runner/work/photogram/photogram/
-      
-      - name: Deploy with rsync
+      - name: Create index.html
         run: |
-          sudo rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
+          echo '<!DOCTYPE html>' > /var/www/photogram/index.html
+          echo '<html lang="en">' >> /var/www/photogram/index.html
+          echo '<head>' >> /var/www/photogram/index.html
+          echo '  <meta charset="UTF-8">' >> /var/www/photogram/index.html
+          echo '  <meta name="viewport" content="width=device-width, initial-scale=1.0">' >> /var/www/photogram/index.html
+          echo '  <title>Welcome to Photogram</title>' >> /var/www/photogram/index.html
+          echo '</head>' >> /var/www/photogram/index.html
+          echo '<body>' >> /var/www/photogram/index.html
+          echo '  <h1>Hello, Photogram!</h1>' >> /var/www/photogram/index.html
+          echo '  <p>This is a simple index page created by the pipeline.</p>' >> /var/www/photogram/index.html
+          echo '</body>' >> /var/www/photogram/index.html
+          echo '</html>' >> /var/www/photogram/index.html
 
-      - name: Verify Deployment Directory
-        run: ls -la /var/www/photogram
+      - name: Verify index.html creation
+        run: cat /var/www/photogram/index.html
      
 
 
