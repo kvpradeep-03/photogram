@@ -34,7 +34,7 @@ jobs:
               
       - name: Delete index page
         run: |
-          rm /var/www/photogram/index.php
+          sudo rm -rf /var/www/photogram/index.php
 
 
 
