@@ -17,7 +17,16 @@ jobs:
       # Step 1: Checkout the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
+     
+      - name: Verify Current Directory
+        run: pwd
+
+      - name: List Contents Before Deletion
+        run: ls -la /var/www/photogram
 
       - name: Delete .git Folder
         run: sudo rm -rf /var/www/photogram/.git
+
+      - name: List Contents After Deletion
+        run: ls -la /var/www/photogram
 
