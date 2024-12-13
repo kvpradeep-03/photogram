@@ -18,11 +18,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
      
+      - name: List runner Directory
+        run: ls -la /home/runner/work/photogram/photogram/
+      
+      - name: Deploy with rsync
+        run: |
+          rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
+
       - name: Verify Deployment Directory
         run: ls -la /var/www/photogram
      
-      - name: List runner Directory
-        run: ls -la /home/runner/work/photogram/photogram/
+
+
+
 
 
 
