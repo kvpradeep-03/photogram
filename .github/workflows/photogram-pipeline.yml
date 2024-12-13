@@ -20,7 +20,10 @@ jobs:
       
       - name: whoami
         run: whoami
-        
+
+      - name: Verify Permissions
+        run: ls -la /var/www/photogram
+
       - name: Delete .git Folder
         run: sudo rm -rf /var/www/photogram/.git
 
