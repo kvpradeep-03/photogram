@@ -5,10 +5,19 @@ $pass = isset($_GET['pass'])?$_GET['pass'] : '';    //passuser
 $result = null;
 $result = User::login($user,$pass); //fetches the username.
 
-if(isset($_GET['logout'])){
+if (isset($_GET['logout'])) {
+    if (Session::isset("session_token")) {
+        $Session = new UserSession(Session::get("session_token"));
+        if ($Session->removeSession()) {
+            echo "<h3> Pervious Session is removing from db </h3>";
+        } else {
+            echo "<h3>Pervious Session not removing from db </h3>";
+        }
+    }
     Session::destroy();
-    die("Session destroyed, <a href='logintest.php'>Login Again</a><br>");
+    die("Session destroyed, <a href='logintest.php'>Login Again</a>");
 }
+
 
 /*
 [completed]
@@ -19,28 +28,18 @@ if(isset($_GET['logout'])){
 5. else print session invalidate and ask user to login
 
 */
-if(Session::get('session_token')){   //retrives the previous session of user (session setted while logging in)  
-    $username = Session::get('session_username');
-    $userObj = new User($username); //if a session exists, use the session data to create the User object.
-    UserSession::authorize(Session::get('session_token'));
-    echo "Welcome back {$userObj->getUsername()}!<br>";
-    $userObj->setBio("i love tech <br>");
-    echo "Bio changed Succesfully ... `{$userObj->getbio()}`<br>";
-
-}else{
-    echo "No Session found, trying to login now...<br>";
-    $result = User::login($user,$pass); //it again gets the user input for $user and $pass.
-    if($result){ 
-        $userObj = new User($result);     //if session doesn't exist it create the User object using the newly obtained username and update the session
-        echo "Login success, {$userObj->getUsername()}<br>";
-        Session::set('session_token',UserSession::authenticate($user,$pass));  
-        Session::set('session_username',$userObj->getUsername());
-    }else{
-        echo "login failed, $user<br>"; 
-
+if (Session::isset("session_token")) {
+    if (UserSession::authorize(Session::get("session_token"))) {
+        echo "<h1>Session Login, WELCOME $user </h1>";
+    } else {
+        Session::destroy();
+        die("<h1>Invalid Session, <a href='logintest.php'>Login Again</a></h1>");
     }
+} else {
+    if (UserSession::authenticate($user, $pass)) {
+        echo "<h1>New LOGIN Success,  WELCOME $user</h1>";
+    } else echo "<h1>New Login Failed! $user</h1>";
 }
-
 
 
 ?>
