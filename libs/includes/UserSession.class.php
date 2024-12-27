@@ -11,7 +11,6 @@ class UserSession {
     //authenticate is just a login part
     public static function authenticate($user, $pass) {
         //$username = User::login($user, $pass); //if we use like this it loops b/w login and authenticate functions.
-        //$user = new User($username);    //returns id of username from auth table
         $user = new User($user);
         if($user){ //here it passes id instead of username so it throes error
              $conn = Database::getConnection();
@@ -22,7 +21,7 @@ class UserSession {
              VALUES ('$user->id', '$token', now(), '$ip', '$agent', '1')";  //returns auth user id which is constructed at User class
              if($conn->query($sql)) {
                     Session::set('session_token', $token);
-                    UserSession::authorize($token);
+                    //UserSession::authorize($token);
                     return $token;
              }else {
                 return false;
@@ -35,20 +34,31 @@ class UserSession {
     
     //authorize is like authentication(verification) of loged user to enable their activities in a page.
     public static function authorize($token) {
-        //$sess = new UserSession($token);
-        //do the task provided in logintest.php
-        if(Session::isset('session_token')){
-            $sess = new UserSession($token);
-            if ($sess !== null && $sess->isValid()) {
-                echo "Session validated <br>";
-
-            }else{
-                echo "Session invalid ,Please <a href='logintest.php'>login again</a> <br>";
-            }
-
+        try {
+            $session = new UserSession($token);
+            if(isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])){
+                if($session->isvalid() and $session->isActive()){
+                    if($_SERVER['REMOTE_ADDR'] == $session->getIP()){
+                        if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
+                            return true;
+                        }else{
+                            throw new Exception("User Agent Mismatch");
+                        }
+                    }else{
+                        throw new Exception("IP Mismatch");
+                    }
+                }else{
+                    $session->removeSession();
+                    throw new Exception("Invalid session");
+                }
         } else {
-            echo "Session token not found. Please <a href='logintest.php'>login again</a> <br>";
+            throw new Exception("IP and User Agent is null");
         }
+        } catch(Exception $e) {
+           // echo $e->getMessage();
+           throw new Exception("Something went wrong");
+        }
+
     }
 
     public function __construct($token) {
@@ -59,14 +69,14 @@ class UserSession {
         if($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $this->data = $row;
-            $this->uid = $row['uid']; 
+            $this->uid = $row['uid'];  //Updating this from database
         }else {
             throw new Exception("Session Invalid.<br>");
         }    
     }
 
     public function getUser(){
-        return new User($this->id);
+        return new User($this->uid);
     }
 
     /*
@@ -76,21 +86,55 @@ class UserSession {
         $logTime = strtotime($this->data['login_time']); //converts textual time into unixtimestamp.
         $currentTime = time();
         $diff = $currentTime - $logTime;
-        
-        return $diff <3600; //1h=3600s returns (bool)
+        if (isset($this->data['login_time'])) {
+            $login_time = DateTime::createFromFormat('Y-m-d H:i:s', $this->data['login_time']);
+            if (3600 > time() - $login_time->getTimestamp()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new Exception("login time is null");
+        }
     }
 
     public function getIP() {
-        return $this->data['ip'];
+        return isset($this->data["ip"]) ? $this->data["ip"] : false;
     }
 
     public function getUserAgent() {
-        return $this->data['user_agent'];
+        return isset($this->data["user_agent"]) ? $this->data["user_agent"] : false;
         
     }
 
     public function deactive() {
-        
+        if(!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        $sql = "UPDATE `session` SET `active` = '0' WHERE `uid` = `$this->uid";
+        return $this->conn->query($sql) ? true : false;
+    }
+
+    public function isActive() {
+        if(isset($this->data['active'])) {
+            return $this->data['active'] ? true : false;
+        }
+    }
+
+    //This function remove current session from the database.
+    public function removeSession() {
+        if(isset($this->data['id'])) {
+            $id = $this->data['id'];
+            if (!$this->conn) {
+                $this->conn = Database::getConnection();
+            }
+            $sql = "DELETE FROM `session` WHERE `id` = $id;";
+            if ($this->conn->query($sql)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 
