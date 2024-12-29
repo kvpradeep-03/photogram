@@ -18,7 +18,6 @@ if($result){
 } else {
 
 ?>
-
 <main class="form-login w-100 m-auto">
   <form action="login.php" method="post">
     <img class="mb-4" src="https://cdn-icons-png.flaticon.com/128/10401/10401230.png" alt="" width="100" height="87">
