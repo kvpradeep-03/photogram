@@ -17,8 +17,6 @@ include_once 'includes/Database.class.php';
 include_once 'includes/UserSession.class.php';
 include_once 'includes/WebAPI.class.php';
 
-
-
 $wapi = new WebAPI();
 $wapi->initiateSession();
 
