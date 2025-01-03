@@ -27,6 +27,7 @@ class WebAPI {
     }
 
     public function initiateSession(){
+        Session::start();
         
     }
 }
