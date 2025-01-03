@@ -2,6 +2,7 @@
 
 $user = $_POST['username'] ?? null;
 $pass = $_POST['password'] ?? null;
+Session::set('mode','web');
 
 if (isset($_GET['logout'])) {
     if (Session::isset("session_token")) {
