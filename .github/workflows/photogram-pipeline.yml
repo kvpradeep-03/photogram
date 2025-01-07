@@ -12,7 +12,7 @@ jobs:
   deploy:           # Name of the job (you can choose any name)
     runs-on: ubuntu-latest      # The environment to run the job (Ubuntu virtual machine)
 
-# 'steps' define the sequence of tasks within the job.
+    # 'steps' define the sequence of tasks within the job.
     steps:
 
       - name: pwd
@@ -21,15 +21,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4     # Uses the 'checkout' action to download the code
 
-      - name: Setup SSH Key            # Set up SSH with the private key from GitHub Secrets
+      - name: Setup SSH               # Set up SSH with the private key from GitHub Secrets
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}      # Development server private key
 
-# SSH into the production server and pull the latest code
+      # SSH into the production server and pull the latest code
       - name: Deploy to Production Server
         run: |
-          ssh -o StrictHostKeyChecking=no user@production_server 'cd /var/www/photogram && git pull origin main'
+          ssh -o StrictHostKeyChecking=no ubuntu@13.127.103.213 'cd /var/www/photogram && git pull origin main'
 
       - name: Removing .git Directory
         run: |
