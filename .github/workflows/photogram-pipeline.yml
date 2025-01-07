@@ -14,16 +14,25 @@ jobs:
 
     # 'steps' define the sequence of tasks within the job.
     steps:
-      # Step 1: Checkout the code from the repository
+
+      - name: pwd
+        run: pwd
+
+      # Checkout the code from the repository
       - name: Checkout Code
         uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
-     
-      - name: List runner Directory
-        run: ls -la /home/runner/work/photogram/photogram/
-      
-      - name: Deploy with rsync
+        with:
+          path: ./  # Checkout directly into the root workspace directory
+
+      - name: Removing existing Deployment Directory
+        run:  sudo rm -rf /var/www/photogram
+
+      - name: Copying Code to Deployment Directory
+        run:  sudo cp -r $(pwd) /var/www/photogram
+
+      - name: Removing .git Directory
         run: |
-          sudo rsync -av --exclude='.git' /home/runner/work/photogram/photogram/ /var/www/photogram/
+          rm -rf /var/www/photogram/htdocs/.git
 
       - name: Verify Deployment Directory
         run: ls -la /var/www/photogram
