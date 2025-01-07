@@ -24,7 +24,7 @@ jobs:
       - name: Setup SSH Key            # Set up SSH with the private key from GitHub Secrets
         uses: webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}       # Development server private key
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}      # Development server private key
 
 # SSH into the production server and pull the latest code
       - name: Deploy to Production Server
