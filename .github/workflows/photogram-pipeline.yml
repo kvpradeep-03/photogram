@@ -1,34 +1,35 @@
 # This is the name of the workflow. It appears in the GitHub Actions tab.
-name: Deploy Application
+name: Deploy to Production
 
 # 'on' specifies the event that triggers the workflow.
-on: 
-  push:              # Trigger the workflow when a push occurs
-    branches:        # Specify the branches to listen to
-      - main         # Only run when pushing to the 'main' branch
+on:
+  push:             # Trigger the workflow when a push occurs
+    branches:       # Specify the branches to listen to
+      - main        # Only run when pushing to the 'main' branch
 
 # 'jobs' define the tasks to be performed.
-jobs: 
-  deploy:            # Name of the job (you can choose any name)
-    runs-on: ubuntu-latest  # The environment to run the job (Ubuntu virtual machine)
+jobs:
+  deploy:           # Name of the job (you can choose any name)
+    runs-on: ubuntu-latest      # The environment to run the job (Ubuntu virtual machine)
 
-    # 'steps' define the sequence of tasks within the job.
+# 'steps' define the sequence of tasks within the job.
     steps:
 
       - name: pwd
         run: pwd
 
-      # Checkout the code from the repository
-      - name: Checkout Code
-        uses: actions/checkout@v3  # Uses the 'checkout' action to download the code
+      - name: Checkout code
+        uses: actions/checkout@v4     # Uses the 'checkout' action to download the code
+
+      - name: Setup SSH Key            # Set up SSH with the private key from GitHub Secrets
+        uses: webfactory/ssh-agent@v0.5.4
         with:
-          path: ./  # Checkout directly into the root workspace directory
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}       # Development server private key
 
-      - name: Removing existing Deployment Directory
-        run:  sudo rm -rf /var/www/photogram
-
-      - name: Copying Code to Deployment Directory
-        run:  sudo cp -r $(pwd) /var/www/photogram
+# SSH into the production server and pull the latest code
+      - name: Deploy to Production Server
+        run: |
+          ssh -o StrictHostKeyChecking=no user@production_server 'cd /var/www/photogram && git pull origin main'
 
       - name: Removing .git Directory
         run: |
@@ -36,7 +37,9 @@ jobs:
 
       - name: Verify Deployment Directory
         run: ls -la /var/www/photogram
-     
+      
+
+
 
 
 
