@@ -29,14 +29,14 @@ jobs:
       # SSH into the production server and pull the latest code
       - name: Deploy to Production Server
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@13.127.103.213 'cd /var/www/photogram && git pull origin main'
+          ssh -o StrictHostKeyChecking=no ubuntu@13.127.103.213 'cd /var/www/photogram && git pull origin main' 
 
       - name: Removing .git Directory
         run: |
           rm -rf /var/www/photogram/htdocs/.git
 
       - name: Verify Deployment Directory
-        run: ls -la /var/www/photogram
+        run: sudo ls -la /var/www/photogram
       
 
 
