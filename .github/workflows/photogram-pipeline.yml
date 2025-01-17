@@ -36,7 +36,7 @@ jobs:
           rm -rf /var/www/photogram/htdocs/.git
 
       - name: Verify Deployment Directory
-        run: sudo ls -la /var/www/photogram
+        run: sudo ls -la /var/www/photogram/
       
 
 
