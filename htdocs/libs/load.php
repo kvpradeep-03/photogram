@@ -44,7 +44,6 @@ function load_template($name){
     //these superglobal are responsible for transferring information(input request) from apache to php.
     //$_SERVER[DOCUMENT_ROOT] => /var/www/photohram  (not html) as configured in `apache2/sites-available/photogram.conf` 
     include $_SERVER['DOCUMENT_ROOT'].get_config('base_path')."/_templates/$name.php";
-    
      
 }
 

@@ -1,5 +1,5 @@
 <?php
- 
+ //Database class is a core Database connection handler.
  class Database{
     //checkes the connection is empty?
     public static $conn = null; 

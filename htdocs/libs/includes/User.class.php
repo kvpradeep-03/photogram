@@ -1,5 +1,5 @@
 <?php
-
+//User class has login,signup functions and sets/gets user datas from auth table.
 class User{
    
     public $conn;
@@ -48,8 +48,6 @@ class User{
         } catch (Exception $e){
             $error = $e->getMessage();
         }
-        // $conn->close();
-        //returns true/false (redirects to _sighup.php)
         return $error; 
     }
 
@@ -60,11 +58,6 @@ class User{
         if($result->num_rows == 1){     // Checks if the result set contains no.of rows == 1
             $row = $result->fetch_assoc();      //fetch_assoc() ->returns the datas in the form of associative array. 
             if(password_verify($pass,$row['password'])){
-                /*[implemented in authorize function]
-                1.Generate Session Token.
-                2.Insert Session Token.
-                3.Build Session And Give Session To User.
-                */
                 return $row['username'];
             }else{
                 return false;
@@ -74,9 +67,8 @@ class User{
         }
     }
     
-    //User object can be constructed by both userId and username.
-    //fetches the username by the initialization of signup object of User class at signup form
-    //_construct fetches id of loged user via their username else throws error.
+    // User object can be constructed by both userId and username.
+    // fetches the username by UserSession::authenticate();
     public function __construct($username){
         $this->conn = Database::getConnection();
         $this->username = $username;
@@ -96,7 +88,7 @@ class User{
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "SELECT `$var` FROM `users` WHERE `id` = '$this->id'"; 
+        $sql = "SELECT `$var` FROM `auth` WHERE `id` = '$this->id'"; 
         $result = $this->conn->query($sql);
         if($result->num_rows == 1){
             return $result->fetch_assoc()["$var"];      //retrieves the specified key value
@@ -110,14 +102,15 @@ class User{
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "UPDATE `users` SET `$var` = '$data' WHERE `id` = '$this->id'";  
+        $sql = "UPDATE `auth` SET `$var` = '$data' WHERE `id` = '$this->id'";  
         if($this->conn->query($sql)){
             return true; 
         }else{
             return false;
         }
     }
-  
+    
+    //if any issues in get and set data remove overrided functions 
     //overrided dob
     public function setDob($year, $month, $day){
         if(checkdate($month, $day, $year)){     
@@ -126,17 +119,6 @@ class User{
             return false;
         }
     }
-
-    //overrided username
-    public function getUsername(){      
-        return $this->username;
-    }
-
-    public function authenticate()
-    {
-    }
-    
-
 
 }
 

@@ -1,5 +1,5 @@
 <?php
-
+//UserSession class has all logged user details, authenticates/authorizes logged users.
 class UserSession {
     
     private $conn; // Explicitly declare the property
@@ -10,9 +10,9 @@ class UserSession {
 
     //authenticate is just a login part
     public static function authenticate($user, $pass) {
-        //$username = User::login($user, $pass); //if we use like this it loops b/w login and authenticate functions.
+        // creating new instance of User class so we can access all user infos like id, username, dob 
         $user = new User($user);
-        if($user){ //here it passes id instead of username so it throes error
+        if($user){ 
              $conn = Database::getConnection();
              $ip = $_SERVER['REMOTE_ADDR']; //user's ip
              $agent = $_SERVER['HTTP_USER_AGENT'];  //user's browser agent
@@ -40,7 +40,9 @@ class UserSession {
                 if($session->isvalid() and $session->isActive()){
                     if($_SERVER['REMOTE_ADDR'] == $session->getIP()){
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
-                            return true;
+                            Session::$user = $session->getUser();   // sets the new instance of user class 
+                            return $session;    //returns the entire user session
+                            
                         }else{
                             throw new Exception("User Agent Mismatch");
                         }
@@ -76,16 +78,14 @@ class UserSession {
     }
 
     public function getUser(){
-        return new User($this->uid);
+        return new User($this->uid);    //returns new instance of User class
     }
 
     /*
-    Check if the validity of the session is within one hour else it inactive.
+    Check if the validity of the session is within one hour 
     */
-    public function isvalid() {
-        $logTime = strtotime($this->data['login_time']); //converts textual time into unixtimestamp.
-        $currentTime = time();
-        $diff = $currentTime - $logTime;
+    public function isValid()
+    {
         if (isset($this->data['login_time'])) {
             $login_time = DateTime::createFromFormat('Y-m-d H:i:s', $this->data['login_time']);
             if (3600 > time() - $login_time->getTimestamp()) {
@@ -94,9 +94,10 @@ class UserSession {
                 return false;
             }
         } else {
-            throw new Exception("login time is null");
+            throw new Exception("login tiem is null");
         }
     }
+
 
     public function getIP() {
         return isset($this->data["ip"]) ? $this->data["ip"] : false;

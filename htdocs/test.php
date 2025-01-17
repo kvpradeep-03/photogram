@@ -192,8 +192,3 @@ $reg = new registed(2003,'TN12R0983');
 $reg->setRating(4.5);
 $reg->getPrivateinfo();*/
 
-
-
-?>
-
-</pre>
