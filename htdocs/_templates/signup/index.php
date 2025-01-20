@@ -62,6 +62,7 @@
       </label>
     </div>
     <button class="btn btn-primary w-100 py-2 hvr-wobble-vertical" type="submit">Sign up</button>
+    <a href="/login.php" class="w-100 btn btn-link">Already have an account?</a>
   </form>
 </main>
 

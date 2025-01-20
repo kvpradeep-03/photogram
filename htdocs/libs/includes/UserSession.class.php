@@ -10,9 +10,10 @@ class UserSession {
 
     //authenticate is just a login part
     public static function authenticate($user, $pass) {
-        // creating new instance of User class so we can access all user infos like id, username, dob 
-        $user = new User($user);
-        if($user){ 
+        $username = User::login($user, $pass);
+        if($username){ 
+            // creating new instance of User class so we can access all user infos like id, username, dob 
+            $user = new User($username);
              $conn = Database::getConnection();
              $ip = $_SERVER['REMOTE_ADDR']; //user's ip
              $agent = $_SERVER['HTTP_USER_AGENT'];  //user's browser agent
@@ -94,7 +95,7 @@ class UserSession {
                 return false;
             }
         } else {
-            throw new Exception("login tiem is null");
+            throw new Exception("login time is null");
         }
     }
 

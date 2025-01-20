@@ -89,31 +89,31 @@ function test_signup($user,$pass,$email,$phone){
  //constructing the objects
  // -were it give an instance(clone of original class mic) to the $mic1 and $mic2
 */
-$mic1 = new Mic();
-$mic2 = new Mic();
+// $mic1 = new Mic();
+// $mic2 = new Mic();
 
 // Setting properties for $mic1
-$mic1->brand = "Roda";
-$mic1->usb_port = "typeb";
+// $mic1->brand = "Roda";
+// $mic1->usb_port = "typeb";
 
 // Setting properties for $mic2
-$mic2->brand = "HyperX";
-$mic2->usb_port = "typec";
+// $mic2->brand = "HyperX";
+// $mic2->usb_port = "typec";
 
 
 // Set the initial light property to "white"
-$mic1->light = "white"; 
+// $mic1->light = "white"; 
 
 // Call the setLight method to change the light color to "blue
-$mic1->setLight("blue");
+// $mic1->setLight("blue");
 
-$mic2->price ="129"; //actual price
-$mic2->setPrice("109"); //coupen applied
+// $mic2->price ="129"; //actual price
+// $mic2->setPrice("109"); //coupen applied
 
-$mic1->color = "Mercury blue";
-$mic1->applyColor("Titaniam grey");
+// $mic1->color = "Mercury blue";
+// $mic1->applyColor("Titaniam grey");
 
-$mic1->getVoltage(array(0.1,2,33,42),'hello',$varient = new Mic());     //goes to __call function
+// $mic1->getVoltage(array(0.1,2,33,42),'hello',$varient = new Mic());     //goes to __call function
 /*
 $conn = Database::getconnection();
 $conn = Database::getconnection();
@@ -192,3 +192,9 @@ $reg = new registed(2003,'TN12R0983');
 $reg->setRating(4.5);
 $reg->getPrivateinfo();*/
 
+$p = new Post(1);
+print($p->getPostText()."<br>");
+print($p->getOwner()."<br>");
+
+?>
+</pre>

@@ -3,5 +3,6 @@
 	"db_username": "photogram_db",
 	"db_password": "prad2003",
 	"db_name": "photogram_db_auth",
-	"base_path": "/"
+	"base_path": "/",
+	"upload_path": "/home/kvpradeep60/photogram_uploads/"
 }
