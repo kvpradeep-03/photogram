@@ -14,7 +14,7 @@ class Post{
             $image_name = md5($author.time()). image_type_to_extension(exif_imagetype($image_temp)); //gets extention type of the image.
             $image_path = get_config('upload_path'). $image_name;
             if(move_uploaded_file($image_temp, $image_path)){ 
-                $image_uri = "/images/$image_name";
+                $image_uri = "/files/$image_name";
                 $insert_command = "INSERT INTO `posts` (`post_text`, `multiple_images`, `image_uri`, `like_count`, `uploaded_time`, `owner`)
                 VALUES ('$text', 0, '$image_uri', 0, now(), '$author')";
                 $db = Database::getConnection();

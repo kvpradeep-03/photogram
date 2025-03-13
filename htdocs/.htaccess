@@ -3,7 +3,7 @@ ErrorDocument 404 /error.php
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^/?images/([^/]+)?$ images.php?name=$1 [L,QSA,NC]
+RewriteRule ^/?files/([^/]+)?$ files.php?name=$1 [L,QSA,NC]
 
 # Resolve .php file for extensionless php urls
 RewriteCond %{REQUEST_FILENAME}\.php -f
