@@ -9,13 +9,14 @@ class Post{
     private $conn;
     public $table;
     public static function registerPost($text, $image_temp){    //(post_text,uploaded image wiil be placed into ~/photogram_uploads)
-        if(isset($_FILES['post_image'])){       //$_FILES magic function stores uploaded images.
+        if(is_file($image_temp) and exif_imagetype($image_temp) != false){       //determine the type of image by scanning the first few bytes of the file
             $author = Session::getUser()->getUsername();
-            $image_name = md5($author.time()). ".jpg";
+            $image_name = md5($author.time()). image_type_to_extension(exif_imagetype($image_temp)); //gets extention type of the image.
             $image_path = get_config('upload_path'). $image_name;
             if(move_uploaded_file($image_temp, $image_path)){ 
-                $insert_command = "INSERT INTO `posts` (`post_text`, `image_uri`, `like_count`, `uploaded_time`, `owner`)
-                VALUES (' astronaut', 'https://cdn3.pixelcut.app/7/20/uncrop_hero_bdf08a8ca6.jpg', '21', now(), 'racer')";
+                $image_uri = "/images/$image_name";
+                $insert_command = "INSERT INTO `posts` (`post_text`, `multiple_images`, `image_uri`, `like_count`, `uploaded_time`, `owner`)
+                VALUES ('$text', 0, '$image_uri', 0, now(), '$author')";
                 $db = Database::getConnection();
                 if($db->query($insert_command)){
                     $id = mysqli_insert_id($db);        //returns the id of post DB.

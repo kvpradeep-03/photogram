@@ -8,7 +8,7 @@
         <p class="lead text-body-secondary">Share a photo that talks about it.</p>
         <textarea id="post_text" class="form-control" name="post_text" placeholder="What are you upto?" rows="3"></textarea>
         <div class="input-group mb-3">
-          <input type="file" class="form-control" name="post_image" id="inputGroupFile02">
+          <input type="file" class="form-control" accept="image/*" name="post_image" id="inputGroupFile02">
           <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
         </div>
         <p>

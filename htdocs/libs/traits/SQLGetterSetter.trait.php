@@ -28,21 +28,24 @@ trait SQLGetterSetter {
         }else{
             //in __call fun if we call any undeclared function in a class if simply omits the arguments which has passed, without throwing error.
             //so we are throwing exception for that un arguments passed for debugging purpose*.
-            throw new Exception("Post::_call() -> $name, function unavailable.");
+            throw new Exception(__CLASS__."::_call() -> $name, function unavailable.");
         }
     }
 
-            //this function  helps to retrive data from database
+    //this function  helps to retrive data from database
     public function _get_data($var){
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "SELECT `$var` FROM `$this->table` WHERE `id` = '$this->id'"; 
-        $result = $this->conn->query($sql);
-        if($result and $result->num_rows == 1){
-            return $result->fetch_assoc()["$var"];      //retrieves the specified key value
-        }else{
-            return null;
+        try{
+            $sql = "SELECT `$var` FROM `$this->table` WHERE `id` = '$this->id'"; 
+            $result = $this->conn->query($sql);
+            if($result and $result->num_rows == 1){
+                return $result->fetch_assoc()["$var"];      //retrieves the specified key value
+                return null;
+            }
+        }catch(Exception $e){
+            throw new Exception(__CLASS__."::_get_data() -> $var, data unavailable");
         }
     }
 
@@ -51,11 +54,15 @@ trait SQLGetterSetter {
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = '$this->id'";  
-        if($this->conn->query($sql)){
-            return true; 
-        }else{
-            return false;
+        try{
+            $sql = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = '$this->id'";  
+            if($this->conn->query($sql)){
+                return true; 
+            }else{
+                return false;
+            }
+        }catch(Exception $e){
+            throw new Exception(__CLASS__."::_set_data() -> $var, data unavailable");
         }
     }
 }
