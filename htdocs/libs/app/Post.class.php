@@ -1,10 +1,11 @@
 <?php
 //include mannually since it didn't works at lib includes.
 include_once __DIR__ . "/../traits/SQLGetterSetter.trait.php";
+use Carbon\Carbon;  //including a name space
 
 class Post{
     
-    use SQLGetterSetter;
+    use SQLGetterSetter;    //including a trait
     public $id;
     private $conn;
     public $table;
@@ -29,6 +30,13 @@ class Post{
         }else{
             throw new Exception("Image not uploaded");
         }
+    }
+
+    public static function getAllPosts(){
+        $db = Database::getConnection();
+        $sql = "SELECT * FROM `posts` ORDER BY `uploaded_time` DESC LIMIT 50";
+        $result = $db->query($sql);
+        return iterator_to_array($result); //iterator_to_array() is used to convert an iterator(iteratable objs )into an array.
     }
 
     public function __construct($id){

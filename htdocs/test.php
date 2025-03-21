@@ -192,14 +192,16 @@ $reg = new registed(2003,'TN12R0983');
 $reg->setRating(4.5);
 $reg->getPrivateinfo();*/
 
-echo Session::getUser()->getEmail();
-$img_tmp = $_FILES['post_image']['tmp_name'];    // tmp_name-> Temporary file path ,php stores the file in a temporary location until it is moved to the desired location.
-$text = $_POST['post_text'];
+// echo Session::getUser()->getEmail();
+// $img_tmp = $_FILES['post_image']['tmp_name'];    // tmp_name-> Temporary file path ,php stores the file in a temporary location until it is moved to the desired location.
+// $text = $_POST['post_text'];
 
-Post::registerPost($text, $img_tmp);
+// Post::registerPost($text, $img_tmp);
 
-echo("_FILES<br>");
-print_r($_FILES);
+// echo("_FILES<br>");
+// print_r($_FILES);
+print_r(Post::getAllPosts());
+
 
 ?>
 </pre>

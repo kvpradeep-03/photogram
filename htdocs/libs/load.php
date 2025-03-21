@@ -10,6 +10,7 @@
 
 //included class files
 //include_once just includes a file only at once and store it in a memory,it doesn't includes furthermore even if we reload this page
+require 'vendor/autoload.php';
 include_once 'includes/Session.class.php';
 include_once 'includes/Mic.class.php';
 include_once 'libs/app/Post.class.php';

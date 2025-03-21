@@ -48,6 +48,19 @@ class Session{
         return Session::$user;  //returns the new user instance 
     }
 
+    public static function isOwnerOf($owner){
+        $sess_user = Session::getUser();
+        if($sess_user){
+            if($sess_user->getUsername() == $owner){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    } 
+
     //function for initial loading of all templates.
     public static function loadTemplate($name){
  
