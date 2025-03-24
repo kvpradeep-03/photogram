@@ -123,9 +123,9 @@ module.exports = function(grunt){
         obfuscator: {
         options: {
             banner: '// obfuscated with grunt-contrib-obfuscator.\n',
-            debugProtection: true,
-            debugProtectionInterval: true,
-            domainLock: ['photo.selfmade.buzz']
+            // debugProtection: true,
+            // debugProtectionInterval: true,
+            // domainLock: ['photo.selfmade.buzz']
         },
         task1: {
             options: {
@@ -167,7 +167,7 @@ module.exports = function(grunt){
             '../js/**/*.js'       
             
             ],
-            tasks: ['concat:js','uglify','obfuscate'],
+            tasks: ['concat:js','uglify','obfuscator'],
             options: {
             spawn: false,
             },

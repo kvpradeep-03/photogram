@@ -2,7 +2,8 @@
 node_modules/
 
 #config file
-photogramconfig.json
+**/photogramconfig.json
+
 
 
 # Ignore environment variables

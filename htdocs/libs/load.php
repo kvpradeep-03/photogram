@@ -18,6 +18,8 @@ include_once 'includes/User.class.php';
 include_once 'includes/Database.class.php';
 include_once 'includes/UserSession.class.php';
 include_once 'includes/WebAPI.class.php';
+include_once 'includes/API.class.php';
+include_once 'includes/REST.class.php';
 
 $wapi = new WebAPI();
 $wapi->initiateSession();

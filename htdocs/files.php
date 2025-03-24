@@ -11,6 +11,8 @@ $image_path = $upload_path . $fname;
 if(is_file($image_path)){
     header("Content-Type:".mime_content_type($image_path));
     header("Content-Length:".filesize($image_path));
+    header("Cache-Control: public, max-age=2419200");
+    header_remove("pragma");    //pregma is used to specify the no-cache directive.in our case we need to cash images for faster loading.
     ob_clean();
     flush();   
     echo file_get_contents($image_path);
