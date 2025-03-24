@@ -1,0 +1,43 @@
+{
+  "name": "obfuscator",
+  "version": "0.5.4",
+  "scripts": {
+    "test": "make all"
+  },
+  "description": "Code protection / obfuscation for node",
+  "keywords": [
+    "code protection",
+    "obfuscator",
+    "uglify"
+  ],
+  "author": "Stephen Mathieson <me@stephenmathieson.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenmathieson/node-obfuscator.git"
+  },
+  "dependencies": {
+    "uglify-js": "~2.4.0",
+    "commander": "~2.0.0"
+  },
+  "devDependencies": {
+    "better-assert": "~1.0.0",
+    "glob": "~3.2.7",
+    "jshint": "~2.0.1",
+    "mocha": "^2.3.0",
+    "should": "~1.2.2",
+    "supertest": "~0.6.0"
+  },
+  "bin": {
+    "obfuscator": "bin/obfuscator"
+  },
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/stephenmathieson/node-obfuscator/issues"
+  },
+  "homepage": "https://github.com/stephenmathieson/node-obfuscator",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "license": "MIT"
+}
