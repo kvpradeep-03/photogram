@@ -22,6 +22,7 @@
       //Session::loadTemplate(Session::currentScript());
       
         Session::loadTemplate(Session::currentScript());
+        
       ?>
  
     </main>
@@ -32,6 +33,8 @@
     ?>
 
     <script src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app.o.js"></script>
+
 
   </body>
 </html>

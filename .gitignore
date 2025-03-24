@@ -1,0 +1,16 @@
+# Ignore Node.js dependencies
+node_modules/
+
+#config file
+photogramconfig.json
+
+
+# Ignore environment variables
+.env
+
+# Ignore log files
+*.log
+
+# # Ignore system files (Mac & Windows)
+# .DS_Store
+# Thumbs.db

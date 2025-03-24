@@ -9,7 +9,7 @@ class User{
     private $conn;
     public $username; // Declare the username property (auth table username)
     public $id; // Declare the id property (auth table id)  
-    public $table = 'auth'; // Declare the table property (auth table name) for SQLGetterSetter trait
+    public $table; // Declare the table property (auth table name) for SQLGetterSetter trait
 
     public static function signup($user,$pass,$email,$phone){
         //connection is fetches from Database.class.php
@@ -59,7 +59,8 @@ class User{
         $this->conn = Database::getConnection();
         $this->username = $username;
         $this->id = null;
-        $sql = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username' LIMIT 1"; //`id` = $id
+        $this->table = 'auth';
+        $sql = "SELECT `id` FROM `$this->table` WHERE `username` = '$username' OR `id` = '$username' LIMIT 1"; //`id` = $id
         $result = $this->conn->query($sql);
         if($result->num_rows == 1){
             $row = $result->fetch_assoc(); 

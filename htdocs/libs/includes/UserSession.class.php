@@ -44,6 +44,7 @@ class UserSession {
                             Session::$user = $session->getUser();   // sets the new instance of user class 
                             return $session;    //returns the entire user session
                             
+                            
                         }else{
                             throw new Exception("User Agent Mismatch");
                         }
