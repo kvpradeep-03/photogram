@@ -4,8 +4,6 @@ node_modules/
 #config file
 project/photogramconfig.json
 
-
-
 # Ignore environment variables
 .env
 
