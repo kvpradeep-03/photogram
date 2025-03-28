@@ -20,21 +20,13 @@ class User{
         $pass = password_hash($pass,PASSWORD_BCRYPT,$options);
         $sql = "INSERT INTO `auth` (`username`, `password`, `email`, `phone`, `block`, `active`)    
         VALUES ('$user', '$pass', '$email', '$phone', '0', '1')";  
-        $error = false;
         try {
-            //checks inserted query status(true/false)
-            //$sql has the username,pass,email such details of signuping users.
-            if($conn->query($sql) === true) { 
-            $error = false;
-        } else {
-            //echo "Error: " . $sql . "<br>" . $conn->error;
-            $error = true;
-            throw new Exception ($conn->error); 
-        } 
+            return $conn->query($sql);
         } catch (Exception $e){
-            $error = $e->getMessage();
+        //    echo "Error: ".$sql."<br>".$conn->error;
+           return false;
         }
-        return $error; 
+        return false; 
     }
 
     public static function login($user,$pass){

@@ -19,7 +19,7 @@ C,15,a[50]),d=n(d,e,f,c,s,21,a[51]),c=n(c,d,e,f,A,6,a[52]),f=n(f,c,d,e,q,10,a[53
 4294967296);k[(h+64>>>9<<4)+15]=(l<<8|l>>>24)&16711935|(l<<24|l>>>8)&4278255360;k[(h+64>>>9<<4)+14]=(b<<8|b>>>24)&16711935|(b<<24|b>>>8)&4278255360;a.sigBytes=4*(k.length+1);this._process();a=this._hash;k=a.words;for(b=0;4>b;b++)h=k[b],k[b]=(h<<8|h>>>24)&16711935|(h<<24|h>>>8)&4278255360;return a},clone:function(){var a=t.clone.call(this);a._hash=this._hash.clone();return a}});r.MD5=t._createHelper(q);r.HmacMD5=t._createHmacHelper(q)})(Math);
 
 class Dialog {
-	constructor(title, message, size="undefined"){
+	constructor(title, message, options=null){
 		if(typeof title === "undefined"){
 			title = "";
 		}
@@ -33,10 +33,41 @@ class Dialog {
 		this.clone = $('#dummy-dialog-modal').clone();
 		this.cloneId = CryptoJS.MD5(Math.random()+"").toString();
 		this.buttons = "default";
-		this.inAnimationClass = 'zoomIn'
-		this.outAnimationClass = 'zoomOut'
-		this.size = size
+		this.inAnimationClass = 'zoomIn';
+		this.outAnimationClass = 'zoomOut';
+
+        if(options == null){
+            this.options = {
+                'framework': "bootstrap",
+                'size': null
+            };
+        } else {
+            this.size = options.size;
+            this.options = options;
+			if(this.options.framework === "undefined"){
+				this.options.framework = "bootstrap";
+			}
+        }
+
+        this.bs_framework = {
+            dismissattr: 'data-bs-dismiss',
+            eventaction: 'bs.modal',
+        };
+
+        this.coreui_framework = {
+            dismissattr: 'data-coreui-dismiss',
+            eventaction: 'coreui.modal',
+        };
+
+        if(this.options.framework == "bootstrap"){
+            this.framework = this.bs_framework;
+        } else if(this.options.framework == "coreui"){
+            this.framework = this.coreui_framework;
+        }
+
 	}
+
+	//Methods (functions defined inside a class). They are used to perform specific tasks
 
 	/**
 	 * animate.style in and out class names
@@ -49,10 +80,6 @@ class Dialog {
 	setEvents(events){
 		this.events = events
 	}
-
-	// footer(footer){
-	// 	this.footer = footer;
-	// }
 
 	renderButtons(){
 		for (var button in this.buttons) {
@@ -69,7 +96,7 @@ class Dialog {
 
 			if(typeof this.buttons[button]['dismiss'] !== 'undefined'){
 				if(this.buttons[button]['dismiss'] == true){
-					$(buttonElement).attr('data-coreui-dismiss', 'modal');
+					$(buttonElement).attr(this.framework.dismissattr, 'modal');
 				}
 			}
 			if(typeof this.buttons[button]['name'] !== 'undefined'){
@@ -91,7 +118,7 @@ class Dialog {
 				if(!$.inArray(events[event].action, ['show', 'shown', 'hide', 'hidden'])){
 					return;
 				} else {
-					var action = events[event].action+'.coreui.modal';
+					var action = events[event].action+'.'+this.framework.eventaction;
 					if(typeof events[event].callback === "function"){
 						var callback = events[event].callback;
 						$('#'+this.cloneId).on(action, {
@@ -101,26 +128,6 @@ class Dialog {
 					}
 				}
 			}
-
-			// $('#'+this.cloneId).on('show.coreui.modal', {
-			// 	target: this
-			// }, function(event){
-			// 	$('#'+event.data.target.cloneId).removeClass(event.data.target.outAnimationClass);
-			// 	animateCSS($('#'+event.data.target.cloneId), event.data.target.inAnimationClass).then(function(){
-			// 		console.log(this);
-			// 	});
-			// });
-
-			// $('#'+this.cloneId).on('hide.coreui.modal', {
-			// 	target: this
-			// }, function(event){
-			// 	console.log('hiding');
-			// 	$('#'+event.data.target.cloneId).removeClass(event.data.target.inAnimationClass).addClass(event.data.target.outAnimationClass);
-			// 	$('#'+event.data.target.cloneId).addEventListener('animated', function(event){
-			// 		console.log('can hide modal now');
-			// 	});
-			// 	return false;
-			// });
 		}
 	}
 
@@ -149,23 +156,40 @@ class Dialog {
 		$('#'+this.cloneId+' .modal-body').html(this.message);
 		$('#'+this.cloneId+' .modal-footer').html('');
 		if(this.buttons === "default"){
-			$('#'+this.cloneId+' .modal-footer').html(`<button type="button" class="btn btn-${theme}" data-coreui-dismiss="modal">Okay</button>`);
+			$('#'+this.cloneId+' .modal-footer').html(`<button type="button" class="btn btn-${theme}" ${this.framework.dismissattr}="modal">Okay</button>`);
 		} else {
 			this.renderButtons();
 		}
 		
-		var dg = new coreui.Modal(document.getElementById(this.cloneId), {
-			keyboard: false
-		});
-		dg.show();
-		$('#'+this.cloneId).on('hidden.coreui.modal',{
-			target: this,
-			modal: this.clone
-		}, function (event) {
-			//console.log(event);
-			$('#'+event.data.target.cloneId).remove();
-		});
-		return dg;
+        if(this.options.framework == "bootstrap"){
+
+			var myModal = new bootstrap.Modal(document.getElementById(this.cloneId), {
+				keyboard: false
+			});
+			myModal.show();
+			
+            $('#'+this.cloneId).on('hidden.bs.modal', {
+				target: this,
+                modal: this.clone
+			}, function (event) {
+				console.log("Hidden bs modal event");
+                $('#'+event.data.target.cloneId).remove();
+            });
+
+        } else if(this.options.framework == "coreui"){
+            var dg = new coreui.Modal(document.getElementById(this.cloneId), {
+                keyboard: false
+            });
+            dg.show();
+            $('#'+this.cloneId).on('hidden.coreui.modal',{
+                target: this,
+                modal: this.clone
+            }, function (event) {
+                //console.log(event);
+                $('#'+event.data.target.cloneId).remove();
+            });
+            return dg;
+        }
 	}
 }
 
@@ -174,54 +198,28 @@ function dialog(title, message){
 	d.show();
 }
 
-const animateCSS = (element, animation, callback=null, prefix = 'animate__') =>
-  // We create a Promise and return it
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-	var node = null;
-	if(typeof element === "object"){
-		node = $(element)[0];
-	} else if(typeof element === "string") {
-		node = document.querySelector(element);
-	}
-    node.classList.add(`${prefix}animated`, animationName);
 
-    // When the animation ends, we clean the classes and resolve the Promise
-    function handleAnimationEnd(event) {
-		if(typeof callback === "function"){
-			callback(event);
-		}
+function display_dialog(bt_name,content,func){
 
-		event.stopPropagation();
-		node.classList.remove(`${prefix}animated`, animationName);
-		resolve('Animation ended');
+d = new Dialog(content);
+d.setButtons([
+    {
+        name: "Cancel",
+        class: 'btn-secondary',
+        onClick: function(event){
+            $(event.data.modal).modal('hide');
+        }
+    },
+    {
+        name: bt_name,
+        class: 'btn-danger btn-loading',
+        onClick: function(event){
+            func();
+            $(event.data.modal).modal('hide');
+        }
     }
-
-    node.addEventListener('animationend', handleAnimationEnd, {once: true});
-  });
-
-
-  function display_dialog(bt_name,content,func){
-
-	d = new Dialog(content);
-	d.setButtons([
-		{
-			name: "Cancel",
-			class: 'btn-secondary',
-			onClick: function(event){
-				$(event.data.modal).modal('hide');
-			}
-		},
-		{
-			name: bt_name,
-			class: 'btn-danger btn-loading',
-			onClick: function(event){
-				func();
-				$(event.data.modal).modal('hide');
-			}
-		}
-	]);
-	d.show();
-  }
+]);
+d.show();
+}
 
   

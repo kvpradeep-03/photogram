@@ -139,7 +139,7 @@ module.exports = function(grunt){
         }
     },
         
-    //till now concat is over, continue on wat
+    
     watch: {
         css: {
         // `/**/` matches any subdirectories inside css.  `*.css` matches all `.css` files in the css directory and its subdirectories.

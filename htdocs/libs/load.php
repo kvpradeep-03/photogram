@@ -13,13 +13,14 @@
 require 'vendor/autoload.php';
 include_once 'includes/Session.class.php';
 include_once 'includes/Mic.class.php';
-include_once 'libs/app/Post.class.php';
 include_once 'includes/User.class.php';
 include_once 'includes/Database.class.php';
 include_once 'includes/UserSession.class.php';
 include_once 'includes/WebAPI.class.php';
-include_once 'includes/API.class.php';
+include_once 'app/Post.class.php';
 include_once 'includes/REST.class.php';
+include_once 'includes/API.class.php';
+
 
 $wapi = new WebAPI();
 $wapi->initiateSession();

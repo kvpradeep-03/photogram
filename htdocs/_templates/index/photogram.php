@@ -13,20 +13,20 @@
             
         ?>
        
-       <div class="col">
+       <div class="col" id="post-<?=$post['id']?>">
           <div class="card shadow-sm">
             <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
             <img src= "<?=$p->getImageUri()?>">
             <div class="card-body">
               <p class="card-text"><?=$p->getPostText()?></p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-primary">Like</button>
-                  <button type="button" class="btn btn-sm btn-outline-success">Share</button>
+                <div class="btn-group" data-id = "<?=$post['id']?>">
+                  <button type="button" class="btn btn-sm btn-outline-primary btn-like">Like</button>
+                  <!-- <button type="button" class="btn btn-sm btn-outline-success">Share</button> -->
                   <?php
                   if(Session::isOwnerOf($p->getOwner())){
                   ?>
-                  <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                  <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
                   <?php
                   }?>
                 </div>

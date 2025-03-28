@@ -65,5 +65,22 @@ trait SQLGetterSetter {
             throw new Exception(__CLASS__."::_set_data() -> $var, data unavailable");
         }
     }
+
+    public function delete(){
+        if(!$this->conn){
+            $this->conn = Database::getConnection();
+        }
+        try{
+            //TODO: delete image(url) before deleting post entry.
+            $sql = "DELETE FROM `$this->table` WHERE `id` = $this->id";  
+            if($this->conn->query($sql)){
+                return true; 
+            }else{
+                return false;
+            }
+        }catch(Exception $e){
+            throw new Exception(__CLASS__."::delete, data unavailable");
+        }
+    }
 }
 ?>

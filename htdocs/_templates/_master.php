@@ -31,6 +31,8 @@
     Session::loadTemplate('_togglebar');
     Session::loadTemplate('_footer');
     ?>
+
+    <!-- This is used as dummy to clone further dialog -->
     <div id="modalsGarbage">
       <div class="modal fade animate__animated" id="dummy-dialog-modal" tabindex="-1" role="dialog" aria-labelledby=""
         aria-hidden="true">
@@ -46,11 +48,14 @@
           </div>
         </div>
       </div>
-	</div>
+    </div>
+
+
 
 
     <script src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/app.o.js"></script>
+    <script src="/js/dialog.js"></script>
 
 
   </body>

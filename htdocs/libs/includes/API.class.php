@@ -25,7 +25,7 @@ class API extends REST
             $this->$func();
         } else {
             if (isset($_GET['namespace'])) {
-                $dir = $_SERVER['DOCUMENT_ROOT'].'/libs/api/'.$_GET['namespace'];
+                $dir = $_SERVER['DOCUMENT_ROOT'].'/libs/includes/api/'.$_GET['namespace'];
                 $file = $dir.'/'.$request.'.php';
                 if (file_exists($file)) {
                     include $file;
