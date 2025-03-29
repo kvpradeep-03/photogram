@@ -66,21 +66,42 @@ trait SQLGetterSetter {
         }
     }
 
-    public function delete(){
-        if(!$this->conn){
+    public function delete() {
+        if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        try{
-            //TODO: delete image(url) before deleting post entry.
-            $sql = "DELETE FROM `$this->table` WHERE `id` = $this->id";  
-            if($this->conn->query($sql)){
-                return true; 
-            }else{
+        try {
+            // Fetch the image URL from the database
+            $query = "SELECT `image_uri` FROM `$this->table` WHERE `id` = $this->id";
+            $result = $this->conn->query($query);
+    
+            if ($result && $result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+                $image_uri = $row['image_uri'];  // Get the actual image path from DB
+                
+                // Construct the absolute file path
+                $image_path = __DIR__ . "/../../../../../photogram_uploads/" . basename($image_uri);
+    
+                // Check if file exists before attempting to delete
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                
+                }
+            } else {
+                throw new Exception(__CLASS__ . "::delete, image url unavailable");
+            }
+    
+            // Proceed to delete the database entry
+            $sql = "DELETE FROM `$this->table` WHERE `id` = $this->id";
+            if ($this->conn->query($sql)) {
+                return true;
+            } else {
                 return false;
             }
-        }catch(Exception $e){
-            throw new Exception(__CLASS__."::delete, data unavailable");
+        } catch (Exception $e) {
+            throw new Exception(__CLASS__ . "::delete, data unavailable: " . $e->getMessage());
         }
     }
+    
 }
 ?>

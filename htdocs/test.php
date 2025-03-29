@@ -203,5 +203,7 @@ $reg->getPrivateinfo();*/
 print_r(Post::getAllPosts());
 
 
+
+
 ?>
 </pre>
