@@ -102,6 +102,10 @@ trait SQLGetterSetter {
             throw new Exception(__CLASS__ . "::delete, data unavailable: " . $e->getMessage());
         }
     }
+
+    public function getID(){
+        return $this->id;
+    }
     
 }
 ?>

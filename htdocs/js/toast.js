@@ -48,10 +48,9 @@ class Toast{
                 <div id="toast-${this.options.placement}" class="toast-container position-fixed ${this.placement_class}">
                 </div>
             `);
-            console.log("log:" + $(`#toast-${this.options.placement}`).html());
-            console.log("placement: " + this.options.placement);
         } else {
             //do nothiung
+
         }
         
     }

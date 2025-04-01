@@ -200,7 +200,16 @@ $reg->getPrivateinfo();*/
 
 // echo("_FILES<br>");
 // print_r($_FILES);
-print_r(Post::getAllPosts());
+$posts = Post::getAllPosts();
+foreach($posts as $post){
+    $p = new Post($post['id']);
+    $l = new Like($p);
+    print($l->getId()."\n");
+    $l->toggleLike();
+    
+
+    // print_r($p);
+}
 
 
 

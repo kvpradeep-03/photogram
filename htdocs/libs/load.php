@@ -18,6 +18,7 @@ include_once 'includes/Database.class.php';
 include_once 'includes/UserSession.class.php';
 include_once 'includes/WebAPI.class.php';
 include_once 'app/Post.class.php';
+include_once 'app/Like.class.php';
 include_once 'includes/REST.class.php';
 include_once 'includes/API.class.php';
 
