@@ -51,11 +51,13 @@
     </div>
 
 
-
-
-    <script src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/app.o.js"></script>
+    <script src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js"></script>  
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>   
+    <script src="/js/app.o.js"></script>  
     <script src="/js/dialog.js"></script>
+    <script src="/js/toast.js"></script>
+
 
 
   </body>

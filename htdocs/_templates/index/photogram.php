@@ -45,12 +45,9 @@
   </div>
 
   <script>
-    // options
-    $('.album').imagesLoaded( {
-      // options...
-      },
-      function() {
-        console.log('All images are loaded');
-      }
-    );
+$(document).ready(function() {
+  $('.album').imagesLoaded(function() {
+    console.log('All images are loaded');
+  });
+});
   </script>
