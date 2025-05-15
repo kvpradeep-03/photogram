@@ -73,6 +73,23 @@ class User{
         }
     }
 
+    // public static function getUsername($userId){
+    //     $conn = Database::getConnection();
+    //     $sql = "SELECT `username` FROM `auth` WHERE `id` = '$userId' LIMIT 1";
+    //     $result = $conn->query($sql);
+    //     if($result->num_rows == 1){
+    //         $row = $result->fetch_assoc(); 
+    //         return $row['username'];
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+
+
+    
+
+  
 }
 
 

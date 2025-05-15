@@ -44,8 +44,14 @@ class Session{
         }
     }
 
-    public static function getUser(){
-        return Session::$user;  //returns the new user instance 
+    public static function getUser() {
+        if (self::$user === null && self::isset('user_session')) {
+            $userSession = self::getUserSession();
+            if ($userSession) {
+                self::$user = $userSession->getUser();
+            }
+        }
+        return self::$user;  // returns the new user instance or null if not authenticated
     }
 
     public static function isOwnerOf($owner){

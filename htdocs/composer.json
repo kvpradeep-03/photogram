@@ -1,5 +1,6 @@
 {
     "require": {
-        "nesbot/carbon": "^3.8"
+        "nesbot/carbon": "^3.8",
+        "php-amqplib/php-amqplib": "^3.7"
     }
 }

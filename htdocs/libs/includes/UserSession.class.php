@@ -21,8 +21,7 @@ class UserSession {
              $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`)
              VALUES ('$user->id', '$token', now(), '$ip', '$agent', '1')";  //returns auth user id which is constructed at User class
              if($conn->query($sql)) {
-                    Session::set('session_token', $token);
-                    //UserSession::authorize($token);
+                    Session::set('session_token', $token);           
                     return $token;
              }else {
                 return false;

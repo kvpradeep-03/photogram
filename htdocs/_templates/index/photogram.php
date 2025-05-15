@@ -1,8 +1,8 @@
 <!--main post section-->
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
+<div class="album py-5" style="background-color:#010001;">
+    <div class="container" style="background-color:#010001;">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2" id="masonry-area">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2 " id="masonry-area">
         <?php
           $posts = Post::getAllPosts();
           use Carbon\Carbon;
@@ -15,18 +15,21 @@
        
        <div class="col" id="post-<?=$post['id']?>">
           <div class="card shadow-sm">
-            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+          <div class="card-header" style="background-color:#010001; padding-top: 15px; padding-bottom: 15px;">
+            <span class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill"><?="@".$p->getOwner()?></span>
+          
+          </div>
             <img src= "<?=$p->getImageUri()?>">
-            <div class="card-body">
-              <p class="card-text"><?=$p->getPostText()?></p>
+            <div class="card-body" style="background-color:#010001;">
+              <p class="card-text text-white" style="color:#f4f4f4"><?=$p->getPostText()?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" data-id = "<?=$post['id']?>">
-                  <button type="button" class="btn btn-sm btn-outline-primary btn-like">Like</button>
+                  <button type="button" class="btn btn-sm btn-outline-primary btn-like" style="color:#f4f4f4">Like</button>
                   <!-- <button type="button" class="btn btn-sm btn-outline-success">Share</button> -->
                   <?php
                   if(Session::isOwnerOf($p->getOwner())){
                   ?>
-                  <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
+                  <button type="button" class="btn btn-sm btn-outline-danger btn-delete" style="color:#f4f4f4">Delete</button>
                   <?php
                   }?>
                 </div>

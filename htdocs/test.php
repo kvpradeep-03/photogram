@@ -14,11 +14,11 @@ print_r($_GET);
 
 //Contains data sent to the server via HTTP POST method.
 //POST method in HTTP requests is typically sent in the request body.
-//listen's both URL and BODY's data 
+//listen's both URL and BODY's data
 echo '$_POST<br>';
 print_r($_POST);
 
-//used to handle file uploads submitted via HTML forms 
+//used to handle file uploads submitted via HTML forms
 //Contains information about uploaded files, including file name, type, size, and temporary location on the server.
 echo '$_FILES<br>';
 print_r($_FILES);
@@ -50,7 +50,7 @@ $check = false;
 try{
     if($user_name == true){
         $check = false;
-        echo "data found!\n";  
+        echo "data found!\n";
     }else{
         $check = false;
         throw new Exception("data not found!\n");
@@ -81,7 +81,7 @@ function test_signup($user,$pass,$email,$phone){
     }
 
 }
- 
+
  test_signup("multi1","multi1pass","multi1@vgw.com","326437432");
  test_signup("multi2","multi1pass","multi2@vgw.com","326437432");
  test_signup("multi3","multi1pass","multi3@vgw.com","326437432");
@@ -102,7 +102,7 @@ function test_signup($user,$pass,$email,$phone){
 
 
 // Set the initial light property to "white"
-// $mic1->light = "white"; 
+// $mic1->light = "white";
 
 // Call the setLight method to change the light color to "blue
 // $mic1->setLight("blue");
@@ -119,18 +119,18 @@ $conn = Database::getconnection();
 $conn = Database::getconnection();
 
 class car {
-	public $color;
+    public $color;
     public static $year;
     protected static $type;
-    
+
     public function setColor($color){
-    	$this->color = $color;
+        $this->color = $color;
     }
     public function getColor(){
       return 'Car color is '.$this->color."\n";
     }
     public static function setYear($year){
-    	self::$year = $year;
+        self::$year = $year;
     }
     public static function getYear(){
         return 'Car year is '.self::$year."\n";
@@ -152,7 +152,7 @@ class registed extends car {
         self::$year = $year;
         $this->no = $no;
         echo "Car manf YEAR: " .self::$year. " and REG.NO: ".$this->no;
- 
+
     }
 
     public function setRating($rating){
@@ -165,8 +165,8 @@ class registed extends car {
     public function getPrivateinfo(){
         echo "Car's TYPE: ".self::$type. " and Rating: ".$this->rating;
     }
-    
- 
+
+
 }
 interface slot{
     public function slot();
@@ -200,19 +200,19 @@ $reg->getPrivateinfo();*/
 
 // echo("_FILES<br>");
 // print_r($_FILES);
-$posts = Post::getAllPosts();
-foreach($posts as $post){
-    $p = new Post($post['id']);
-    $l = new Like($p);
-    print($l->getId()."\n");
-    $l->toggleLike();
-    
-
-    // print_r($p);
-}
+// $posts = Post::getAllPosts();
+// foreach($posts as $post) {
+//     $p = new Post($post['id']);
+//     $l = new Like($p);
+//     print($l->getId()."\n");
+//     $l->toggleLike();
 
 
+//     // print_r($p);
+// }
 
+
+print_r($_SERVER)
 
 ?>
 </pre>

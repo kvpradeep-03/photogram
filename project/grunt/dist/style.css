@@ -1,3 +1,15 @@
-/*Processed by SNA labs on Last Sync: 3/4/2025 @ 18:32:29*/
-
+/*Processed by SNA labs on Last Sync: 15/5/2025 @ 16:53:0*/
+.dropdown-menu{
+    background-color: rgba(255, 255, 255, 0.05);
+    /* Very light transparent white */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    /* for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* subtle border */
+    border-radius: 10px;
+}
+.signupHero{
+    border-radius: 30px;
+}
 /*# sourceMappingURL=style.css.map */

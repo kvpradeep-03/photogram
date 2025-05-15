@@ -17,9 +17,8 @@ class WebAPI {
         Session::start();
         if(Session::isset("session_token")){
             try{
-                $session = UserSession::authorize(Session::get('session_token'));
-                Session::set('user_session', $session);     //stores entire user session
-                               
+                $session = UserSession::authorize(Session::get('session_token'));              
+                Session::set('user_session', $session);     //stores entire user session                     
             }catch(Exception $e){
 
             }
