@@ -53,16 +53,6 @@ function load_template($name){
      
 }
 
-//function for user validation.
-function validate_credential($username, $password){  
-    if($username == "kvpradeep60@gmail.com" and $password == "password"){
-        return true;
-    }
-    else{
-        return false;
-    }
-
-}
 
 
 

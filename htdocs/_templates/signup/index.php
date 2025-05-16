@@ -12,26 +12,26 @@ if(isset($_POST['username']) and isset($_POST['phone']) and isset($_POST['email'
 
 <?php
     if($signup) {
-        if($error) { //(changed !error tempfix)
+        if((int)$error) { //(changed !error tempfix)
             ?>
-<main class="container">
-  <div class="bg-body-tertiary p-5 rounded mt-3">
-    <h1>Signup Success</h1>
-    <p class="lead">Now you can login <a
-        href="<?php echo get_config('base_path'); ?>login.php">here</a>
-    </p>
-  </div>
-</main>
-<?php
-        } else {
-            ?>
-<main class="container">
-  <div class="bg-body-tertiary p-5 rounded mt-3">
-    <h1>Signup Fail</h1>
-    <p class="lead">Something went wrong, <?=$error?></p>
-  </div>
-</main>
-<?php
+            <main class="container">
+              <div class="bg-body-tertiary p-5 rounded mt-3">
+                <h1>Signup Success</h1>
+                <p class="lead">Now you can login <a
+                    href="<?php echo get_config('base_path'); ?>login.php">here</a>
+                </p>
+              </div>
+            </main>
+          <?php
+          } else {
+          ?>
+            <main class="container">
+              <div class="bg-body-tertiary p-5 rounded mt-3">
+                <h1>Signup Fail</h1>
+                <p class="lead">Something went wrong, <?=$error?></p>
+              </div>
+            </main>
+            <?php
         }
     } else {
         ?>
