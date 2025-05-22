@@ -1,6 +1,7 @@
 <?php
 
-error_reporting(E_ALL ^ E_DEPRECATED);
+ini_set('memory_limit', '256M');
+
 require_once 'REST.class.php';
 class API extends REST
 {
@@ -29,7 +30,7 @@ class API extends REST
                 $file = $dir.'/'.$request.'.php';
                 if (file_exists($file)) {
                     include $file;
-                    $this->current_call = Closure::bind(${$func}, $this, get_class());  //binding the request function to this API class
+                    $this->current_call = Closure::bind(${$func}, $this, get_class());
                     $this->$func(); //dynamically calling the function
                 } else {
                     $this->response($this->json(['error'=>'method_not_found']), 404);

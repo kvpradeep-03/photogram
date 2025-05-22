@@ -14,10 +14,14 @@ $(document).on('click', '.album .btn-like', function () {
     $this = $(this);
     $(this).html() == "Like" ? $(this).html("Liked") : $(this).html("Like");
     $(this).hasClass('btn-outline-primary') ? $(this).removeClass('btn-outline-primary').addClass('btn-primary') : $(this).removeClass('btn-primary').addClass('btn-outline-primary');
+    console.log(post_id);
     $.post('/api/posts/like', {
         id: post_id
     }, function (data, textSuccess, xhr) {
-        if (textSuccess == "success") {
+        console.log("like")
+         console.log(textSuccess);
+         console.log(data);
+        if (textSuccess == "success") {    
             if (data.liked) {
                 $($this).html("Liked");
                 $($this).removeClass('btn-outline-primary').addClass('btn-primary');
@@ -31,7 +35,7 @@ $(document).on('click', '.album .btn-like', function () {
 
 
 //delete post
-$('.btn-delete').on('click', function () {
+$(document).on('click', '.btn-delete', function () {
     var post_id = $(this).parent().attr('data-id');
     d = new Dialog("Delete Post", "Are you sure want to remove this post");
     d.setButtons([
@@ -54,7 +58,7 @@ $('.btn-delete').on('click', function () {
                             // Refresh the page
                             setTimeout(function () {
                                 location.reload();
-                            }, 500); // Delay optional
+                            }, 200); // Delay optional
                         }
                     });
 
@@ -70,7 +74,4 @@ $('.btn-delete').on('click', function () {
         }
     ]);
     d.show();
-    // Redirect to avoid form resubmission
-    header("Location: ".$_SERVER['REQUEST_URI']);
-    exit;
 });

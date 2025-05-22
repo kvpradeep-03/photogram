@@ -10,6 +10,9 @@
 
 //included class files
 //include_once just includes a file only at once and store it in a memory,it doesn't includes furthermore even if we reload this page
+
+ini_set('memory_limit', '256M');
+
 require 'vendor/autoload.php';
 include_once 'includes/Session.class.php';
 include_once 'includes/Mic.class.php';
@@ -26,37 +29,31 @@ include_once 'includes/API.class.php';
 $wapi = new WebAPI();
 $wapi->initiateSession();
 
-function get_config($key, $default= null){
+function get_config($key, $default = null)
+{
     //access global var
-    global $__site_config;  
+    global $__site_config;
     // Decodes the JSON string ($__site_config) into a PHP associative array ($array).true indicates that the decoded JSON objects should be returned as associative arrays
-    $array= json_decode($__site_config, true);
-    if(isset($array[$key])){
+    $array = json_decode($__site_config, true);
+    if(isset($array[$key])) {
         return $array[$key];
-    }else {
+    } else {
         return $default;
     }
 }
 
 //function for initial loading of all templates.
-function load_template($name){
- 
+function load_template($name)
+{
+
     //__DIR__ provides the absolute path to the directory containing the current PHP script, tightly coupled with current working directory
-    //Current dir is libs (htdocs/get_config('base_path')/libs) => One step back (htdocs/photogram/app)->(Out of libs dir, Then it currently inside the app dir) => app 
+    //Current dir is libs (htdocs/get_config('base_path')/libs) => One step back (htdocs/photogram/app)->(Out of libs dir, Then it currently inside the app dir) => app
     //[*changes the dir not folder*]
     //include __DIR__."/../_templates/$name.php";
-    
-    //superglobal is an array containing information such as headers, paths, and script locations, tightly coupled with server envirnoment and request details. 
+
+    //superglobal is an array containing information such as headers, paths, and script locations, tightly coupled with server envirnoment and request details.
     //these superglobal are responsible for transferring information(input request) from apache to php.
-    //$_SERVER[DOCUMENT_ROOT] => /var/www/photohram  (not html) as configured in `apache2/sites-available/photogram.conf` 
+    //$_SERVER[DOCUMENT_ROOT] => /var/www/photohram  (not html) as configured in `apache2/sites-available/photogram.conf`
     include $_SERVER['DOCUMENT_ROOT'].get_config('base_path')."/_templates/$name.php";
-     
+
 }
-
-
-
-
-
-?>
-
-

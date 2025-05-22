@@ -35,7 +35,6 @@
   </main>
 
   <?php
-    Session::loadTemplate('_togglebar');
 Session::loadTemplate('_footer');
 ?>
 
@@ -67,10 +66,8 @@ Session::loadTemplate('_footer');
   <!--imagesloaded CDN-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
 
-  <!--mansory cdn-->
-  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
-    integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async>
-  </script>
+  <!-- Masonry -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
@@ -78,7 +75,7 @@ Session::loadTemplate('_footer');
     src="<?=get_config('base_path')?>assets/dist/js/bootstrap.bundle.min.js">
   </script>
 
-  <script src="/js/app.o.js"></script>
+  <script src="/js/app.min.js"></script>
   <script src="/js/dialog.js"></script>
   <script src="/js/toast.js"></script>
 

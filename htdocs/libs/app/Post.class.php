@@ -21,6 +21,7 @@ class Post{
                 $db = Database::getConnection();
                 if($db->query($insert_command)){
                     $id = mysqli_insert_id($db);        //returns the id of post DB.
+                    
                     return new Post($id);
                 }else{
                     return false;

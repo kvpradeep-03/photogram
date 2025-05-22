@@ -25,7 +25,7 @@ if (!$login_page) {
 	window.location.href = "<?=$redirect_to ?>"
 </script>
 <?php
-    } else {//TODO:fix error div ui at darkmode.
+    } else {
         ?>
 <main class="container">
 	<div class="bg-secondary p-5 rounded mt-3">

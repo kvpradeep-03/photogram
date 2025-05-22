@@ -1,8 +1,9 @@
 <?php
+
 //https:domain/api/posts/like
 
 ${basename(__FILE__,'.php')} = function(){
-    if($this->isAuthenticated() and $this->paramsExist('id')){  //paramsExist checks is any param passed on post.
+    if($this->paramsExist('id')){  //paramsExist checks is any param passed on post.
         $p = new Post($this->_request['id']);
         $l = new Like($p);
         $l->toggleLike();

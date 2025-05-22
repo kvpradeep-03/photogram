@@ -17,10 +17,13 @@ class WebAPI {
         Session::start();
         if(Session::isset("session_token")){
             try{
-                $session = UserSession::authorize(Session::get('session_token'));              
-                Session::set('user_session', $session);     //stores entire user session                     
+                Session::$usersession = UserSession::authorize(Session::get('session_token'));              
+                // Session::set('user_session', $session);     //stores entire user session   
+                // print_r(Session::get('user_session')); // prints the entire session
+                // // print_r(Session::get('user_session'));                 
             }catch(Exception $e){
-
+                echo $e->getMessage();
+                throw new Exception("Error: ".$e->getMessage());
             }
         }
 

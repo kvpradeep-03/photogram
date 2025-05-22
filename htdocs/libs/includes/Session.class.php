@@ -1,4 +1,7 @@
 <?php
+
+ini_set('memory_limit', '256M');
+
 //Session class used to manipulate user session by setting,getting,validating.
 class Session{
 
@@ -33,7 +36,7 @@ class Session{
     }
 
     public static function getUserSession(){
-        return Session::get('user_session');    //returns entire usersession stored by WebAPI via authorize block of UserSession
+        return Session::$usersession ;    //returns entire usersession stored by WebAPI via authorize block of UserSession
     }
 
     public static function get($key,$default = false){

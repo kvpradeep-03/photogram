@@ -42,8 +42,7 @@ class UserSession {
                         if($_SERVER['HTTP_USER_AGENT'] == $session->getUserAgent()){
                             Session::$user = $session->getUser();   // sets the new instance of user class 
                             return $session;    //returns the entire user session
-                            
-                            
+                                                       
                         }else{
                             throw new Exception("User Agent Mismatch");
                         }
@@ -58,8 +57,7 @@ class UserSession {
             throw new Exception("IP and User Agent is null");
         }
         } catch(Exception $e) {
-           // echo $e->getMessage();
-           throw new Exception("Something went wrong");
+           throw new Exception("Something went wrong".$e->getMessage());
         }
 
     }

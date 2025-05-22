@@ -1,3 +1,6 @@
+php_value memory_limit 256M
+
+
 <FilesMatch "\.(ico|pdf|jpg|jpeg|png|webp|gif|html|htm|xml|txt|xsl|css)$">
     Header set Cache-Control "max-age=31536050"
 </FilesMatch>
